@@ -18,6 +18,7 @@ Route::get('getFeaturedRestaurant', 'RestaurantController@getFeaturedRestaurant'
 
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
+Route::post('logout', 'UserController@logout');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
