@@ -38,27 +38,36 @@ class UserController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('user','token'),201);
+            
+        // return response()->json(compact('user','token'),201);
+        return response()->json([
+            'success'=> true,
+            'user'=> $user,
+            'token' =>$token]);
     }
     
     public function login(Request $request)
     {
         $credentials = $request->json()->all();
-
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'invalid_credentials'], 400);
             }
+            $user = JWTAuth::user();
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response()->json( compact('token') );
+        return response()->json([
+            'success'=> true,
+            'user'=> $user,
+            'token' =>$token
+           
+
+        ]);
     }
-
-    
-
     public function getAuthenticatedUser()
     {
         try {

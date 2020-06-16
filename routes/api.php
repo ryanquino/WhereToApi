@@ -20,6 +20,7 @@ Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
 Route::get('getMenuCategory/{id}', 'MenuController@getMenuCategory');
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
+Route::post('logout', 'UserController@logout');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
