@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
+use App\Restaurant;
+use App\Categories;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -82,4 +85,18 @@ class MenuController extends Controller
     {
         //
     }
+
+    public function getMenuCategory($id){
+        $menu = DB::table('menu')
+            ->join('menu_categories', 'menu.id', '=', 'menu_categories.menuId')
+            ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
+            ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
+            ->select('menu.id','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price')
+            ->where('categoryId' , '=', $id)
+            ->get();
+
+        return response()->json($menu);
+    }
+
+
 }

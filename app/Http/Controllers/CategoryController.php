@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Restaurant;
+use App\Categories;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-class RestaurantController extends Controller
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RestaurantController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show(Categories $categories)
     {
         //
     }
@@ -52,10 +52,10 @@ class RestaurantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurant $restaurant)
+    public function edit(Categories $categories)
     {
         //
     }
@@ -64,10 +64,10 @@ class RestaurantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(Request $request, Categories $categories)
     {
         //
     }
@@ -75,28 +75,16 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(Categories $categories)
     {
         //
     }
 
-    public function getFeaturedRestaurant(){
-
-        $featuredResto = DB::table('restaurant')->where('isFeatured', '=', 1)->get();
-
-        return response()->json($featuredResto);
+    public function getCaregoryList(){
+        $categories = Categories::all();
+        return response()->json($categories);
     }
-
-    public function getRestaurantMenu($id){
-
-        $menu = Restaurant::find($id)->menu;
-
-        return response()->json($menu);
-
-
-    }
-
 }
