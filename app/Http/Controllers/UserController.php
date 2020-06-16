@@ -27,7 +27,9 @@ class UserController extends Controller
         ]);
 
         if($validator->fails()){
-                return response()->json($validator->errors()->toJson(), 400);
+                return response()->json(
+                    $validator->errors()->toJson(), 400,
+                );
         }
 
         $user = User::create([
@@ -38,12 +40,15 @@ class UserController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
-            
+           
+            return response()->json([
+                'success'=> true,
+                'user'=> $user,
+                'token' =>$token]);
+           
+           
         // return response()->json(compact('user','token'),201);
-        return response()->json([
-            'success'=> true,
-            'user'=> $user,
-            'token' =>$token]);
+        
     }
     
     public function login(Request $request)
@@ -52,14 +57,13 @@ class UserController extends Controller
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json([
-                    'success' => false,
+                    'message' => false,
                     'error' => 'invalid_credentials'], 400);
             }
             $user = JWTAuth::user();
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
         return response()->json([
             'success'=> true,
             'user'=> $user,
@@ -68,6 +72,40 @@ class UserController extends Controller
 
         ]);
     }
+
+
+    public function logout(Request $request)
+    {
+       $token = JWTAuth::fromUser($user);
+
+       if(!User::checkToken($request)){
+            return response()->json([
+                'message' => 'Token is Required',
+                'success' => false
+            ],422);
+       }
+
+
+       try{
+           JWTAuth::invalidate(JWTAuth::parseToken($request->$token));
+           return response()->json([
+               'success'=>true,
+               'message'=>'Clear sailing Now.'
+           ]); 
+
+       }catch(JWTException $exception)
+       {
+           return response()->json([
+               'success'=>false,
+               'message'=>'Erokonbeh'
+           ],500);
+       }
+
+    }
+
+
+
+
     public function getAuthenticatedUser()
     {
         try {
