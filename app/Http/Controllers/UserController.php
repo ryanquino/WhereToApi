@@ -76,33 +76,39 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-       $token = JWTAuth::fromUser($user);
-
-       if(!User::checkToken($request)){
+           
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+           
             return response()->json([
-                'message' => 'Token is Required',
-                'success' => false
-            ],422);
-       }
+                'success'=>true,
+                'message'=>'Logout Success']);
 
-
-       try{
-           JWTAuth::invalidate(JWTAuth::parseToken($request->$token));
-           return response()->json([
-               'success'=>true,
-               'message'=>'Clear sailing Now.'
-           ]); 
-
-       }catch(JWTException $exception)
-       {
-           return response()->json([
-               'success'=>false,
-               'message'=>'Erokonbeh'
-           ],500);
-       }
-
+        } catch (JWTException $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, the user cannot be logged out'
+            ], 500);
+        }
     }
 
+    public function getCurrentUser(Request $request){
+       if(!User::checkToken($request)){
+           return response()->json([
+            'message' => 'Token is required'
+           ],422);
+       }
+        
+        $user = JWTAuth::parseToken()->authenticate();
+       $isProfileUpdated=false;
+        if($user->isPicUpdated==1 && $user->isEmailUpdated){
+            $isProfileUpdated=true;
+            
+        }
+        $user->isProfileUpdated=$isProfileUpdated;
+
+        return $user;
+}
 
 
 
