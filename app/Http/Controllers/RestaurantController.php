@@ -85,7 +85,7 @@ class RestaurantController extends Controller
 
     public function getFeaturedRestaurant(){
 
-        $featuredResto = DB::table('restaurant')->where('isFeatured', '=', 1)->get();
+        $featuredResto = DB::table('restaurants')->where('isFeatured', '=', 1)->get();
 
         return response()->json($featuredResto);
     }
