@@ -89,11 +89,11 @@ class OrderController extends Controller
     public function putOrder(Request $request){
         $userId = $request->json()->get('userId');
         $orderList = $request->json()->get('order');
-        $optionalAddress = $request->json()->get('optionalAddress');
+        $optionalAddress = $request->json()->get('deliveryAddress');
 
         $order = new Order;
         $order->clientId = $userId;
-        $order->optionalAddress = $optionalAddress;
+        $order->deliveryAddress = $optionalAddress;
         $order->status = 0;
 
         $order->save();
@@ -115,7 +115,7 @@ class OrderController extends Controller
             ->join('food_orders', 'food_orders.menuId', '=', 'menu.id')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('transactions', 'transactions.id', '=', 'food_orders.transactionId')
-            ->select('restaurants.restaurantName', 'menu.menuName', 'menu.description', 'menu.price', 'food_orders.quantity', 'transactions.optionalAddress')
+            ->select('restaurants.restaurantName','restaurants.address', 'menu.menuName', 'menu.description', 'menu.price', 'food_orders.quantity', 'transactions.deliveryAddress')
             ->where('food_orders.transactionId', '=', $id)
             ->get();
 

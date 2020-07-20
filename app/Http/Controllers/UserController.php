@@ -21,6 +21,7 @@ class UserController extends Controller
     {
             $validator = Validator::make($request->json()->all() , [
             'name' => 'required|string|max:255',
+            'email' => 'required|string|max:55|unique:users',
             'contactNumber' => 'required|string|max:11|unique:users',
             'address' => 'required|string|max:255',
             'password' => 'required|string|min:6', 
@@ -34,9 +35,11 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $request->json()->get('name'),
+            'email' => $request->json()->get('email'),
             'contactNumber' => $request->json()->get('contactNumber'),
             'address' => $request->json()->get('address'),
             'password' => Hash::make($request->json()->get('password')),
+            'status' => 1
         ]);
 
         $token = JWTAuth::fromUser($user);
