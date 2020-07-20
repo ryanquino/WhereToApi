@@ -125,7 +125,7 @@ class OrderController extends Controller
         $details = DB::table('transactions')
             ->join('users', 'users.id', '=', 'transactions.clientId')
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
-            ->select('users.name','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at')
+            ->select('transactions.id','users.name','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at')
             ->where('transactions.id', '=', $id)
             ->get();
 
