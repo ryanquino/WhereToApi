@@ -19,6 +19,7 @@ Route::get('getCategories', 'CategoryController@getCaregoryList');
 Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
 Route::get('getMenuCategory/{id}', 'MenuController@getMenuCategory');
 Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransaction');
+Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');

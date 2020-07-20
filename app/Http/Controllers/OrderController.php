@@ -113,12 +113,23 @@ class OrderController extends Controller
     public function getOrdersPerTransaction($id){
         $menu = DB::table('menu')
             ->join('food_orders', 'food_orders.menuId', '=', 'menu.id')
-            ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('transactions', 'transactions.id', '=', 'food_orders.transactionId')
-            ->select('restaurants.restaurantName','restaurants.address', 'menu.menuName', 'menu.description', 'menu.price', 'food_orders.quantity', 'transactions.deliveryAddress')
+            ->select('menu.menuName', 'menu.description', 'menu.price', 'food_orders.quantity')
             ->where('food_orders.transactionId', '=', $id)
             ->get();
 
         return response()->json($menu);
+    }
+
+    public function getTransactionDetails($id){
+        $details = DB::table('transactions')
+            ->join('users', 'users.id', '=', 'transactions.clientId')
+            ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
+            ->select('users.name','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at')
+            ->where('transactions.id', '=', $id)
+            ->get();
+
+        return response()->json($details);
+
     }
 }
