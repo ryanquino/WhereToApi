@@ -22,6 +22,8 @@ Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransactio
 Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('register', 'UserController@register');
+Route::post('assignRider', 'OrderController@assignRider');
+
 Route::post('login', 'UserController@login');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

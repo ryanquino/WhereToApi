@@ -88,11 +88,13 @@ class OrderController extends Controller
 
     public function putOrder(Request $request){
         $userId = $request->json()->get('userId');
+        $restaurantId = $request->json()->get('restaurantId');
         $orderList = $request->json()->get('order');
         $optionalAddress = $request->json()->get('deliveryAddress');
 
         $order = new Order;
         $order->clientId = $userId;
+        $order->restaurantId = $restaurantId;
         $order->deliveryAddress = $optionalAddress;
         $order->status = 0;
 
@@ -131,5 +133,14 @@ class OrderController extends Controller
 
         return response()->json($details);
 
+    }
+
+    public function assignRider(Request $request){
+        $order = Order::find($request->json()->get('transactionId'));
+
+        $order->riderId = $request->json()->get('riderId');
+        $order->status = 1;
+        
+        $order->save();
     }
 }

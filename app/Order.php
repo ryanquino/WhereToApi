@@ -10,6 +10,6 @@ class Order extends Model
     protected $table = "transactions";
 
     protected $fillable = [
-        'clientId', 'optionalAddress', 'status'
+        'clientId', 'riderId', 'restaurantId', 'deliveryAddress', 'status'
     ];
 }
