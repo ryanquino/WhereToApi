@@ -20,10 +20,11 @@ Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
 Route::get('getMenuCategory/{id}', 'MenuController@getMenuCategory');
 Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransaction');
 Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails');
+Route::get('getAllPlayerId', 'UserController@getAllPlayerId');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('register', 'UserController@register');
 Route::post('assignRider', 'OrderController@assignRider');
-
+Route::post('assignPlayerId', 'UserController@assignPlayerId');
 Route::post('login', 'UserController@login');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

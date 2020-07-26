@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\PushNotificationDevice;
 Use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -130,5 +131,24 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
         }
         return response()->json(compact('user'));
+    }
+
+    public function assignPlayerId(Request $request){
+        $riderId = $request->json()->get('riderId');
+        $playerId = $request->json()->get('playerId');
+        
+        $device = PushNotificationDevice::firstOrCreate(['riderId' => $riderId, 'deviceId' => $playerId]);
+
+        if($device->wasRecentlyCreated)return response()->json('Sucessful');
+        else return response()->json('Duplicate Entry');     
+
+    }
+
+    public function getAllPlayerId(){
+        $details = PushNotificationDevice::all()->pluck('deviceId');
+
+        return response()->json($details);
+
+
     }
 }

@@ -136,11 +136,24 @@ class OrderController extends Controller
     }
 
     public function assignRider(Request $request){
-        $order = Order::find($request->json()->get('transactionId'));
+        $transactionId = $request->json()->get('transactionId');
+        $details = DB::table('transactions')->select('riderId')->where('id', '=', $transactionId)->get();
+        $id = json_decode($details);
+        foreach ($id as $value) {
+            foreach ($value as $key => $val) {
+                $riderId = $val;            }
+        }
+        if($riderId == null){
+            $order = Order::find($transactionId);
+            $order->riderId = $request->json()->get('riderId');
+            $order->status = 1;            
+            $order->save();
 
-        $order->riderId = $request->json()->get('riderId');
-        $order->status = 1;
+            return response()->json(true);
+        }
+        else{
+            return response()->json(false);
+        }
         
-        $order->save();
     }
 }
