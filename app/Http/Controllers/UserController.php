@@ -149,7 +149,7 @@ class UserController extends Controller
                         ->join('users', 'users.id', '=', 'notification_device.userId')
                         ->select('notification_device.deviceId')
                         ->where('userType', '=', 1)
-                        ->get()
+                        ->get();
         return response()->json($details);
 
 
