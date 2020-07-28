@@ -134,19 +134,22 @@ class UserController extends Controller
     }
 
     public function assignPlayerId(Request $request){
-        $riderId = $request->json()->get('riderId');
+        $userId = $request->json()->get('userId');
         $playerId = $request->json()->get('playerId');
         
-        $device = PushNotificationDevice::firstOrCreate(['riderId' => $riderId, 'deviceId' => $playerId]);
+        $device = PushNotificationDevice::firstOrCreate(['userId' => $userId, 'deviceId' => $playerId]);
 
-        if($device->wasRecentlyCreated)return response()->json('Sucessful');
+        if($device->wasRecentlyCreated)return response()->json(true);
         else return response()->json('Duplicate Entry');     
 
     }
 
-    public function getAllPlayerId(){
-        $details = PushNotificationDevice::all()->pluck('deviceId');
-
+    public function getAllRiderPlayerId(){
+        $details = DB::table('notification_device')
+                        ->join('users', 'users.id', '=', 'notification_device.userId')
+                        ->select('notification_device.deviceId')
+                        ->where('userType', '=', 1)
+                        ->get()
         return response()->json($details);
 
 
