@@ -66,6 +66,9 @@ class UserController extends Controller
                     'error' => 'invalid_credentials'], 400);
             }
             $user = JWTAuth::user();
+            if($user['userType'] == 1){
+                $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
+            }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
@@ -113,8 +116,17 @@ class UserController extends Controller
         $user->isProfileUpdated=$isProfileUpdated;
 
         return $user;
-}
+    }
 
+    public function goOffline($id){
+        $user = User::find($id);
+        $user->status = 0;
+
+        if($user->save()){
+            return response()->json(true);
+        }
+        else return response()->json(false);
+    }
 
 
     public function getAuthenticatedUser()

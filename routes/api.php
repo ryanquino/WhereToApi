@@ -23,6 +23,7 @@ Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails'
 Route::get('viewCurrentOrders/{id}', 'OrderController@viewCurrentOrders');
 Route::get('getAllPlayerId', 'UserController@getAllRiderPlayerId');
 Route::post('putOrder', 'OrderController@putOrder');
+Route::post('goOffline/{id}', 'UserController@goOffline');
 Route::post('register', 'UserController@register');
 Route::post('assignRider', 'OrderController@assignRider');
 Route::post('assignPlayerId', 'UserController@assignPlayerId');
