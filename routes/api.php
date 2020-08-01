@@ -20,6 +20,7 @@ Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
 Route::get('getMenuCategory/{id}', 'MenuController@getMenuCategory');
 Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransaction');
 Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails');
+Route::get('viewCurrentOrders/{id}', 'OrderController@viewCurrentOrders');
 Route::get('getAllPlayerId', 'UserController@getAllRiderPlayerId');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('register', 'UserController@register');
