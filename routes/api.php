@@ -26,6 +26,10 @@ Route::post('register', 'UserController@register');
 Route::post('assignRider', 'OrderController@assignRider');
 Route::post('assignPlayerId', 'UserController@assignPlayerId');
 Route::post('login', 'UserController@login');
+Route::post('transactionComplete/{id}', 'OrderController@transactionComplete');
+Route::post('transactionBuying/{id}', 'OrderController@transactionBuying');
+Route::post('transactionDelivery/{id}', 'OrderController@transactionDelivery');
+Route::post('updateOrder', 'OrderController@updateOrder');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
 

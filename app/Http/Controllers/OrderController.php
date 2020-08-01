@@ -91,11 +91,13 @@ class OrderController extends Controller
         $restaurantId = $request->json()->get('restaurantId');
         $orderList = $request->json()->get('order');
         $optionalAddress = $request->json()->get('deliveryAddress');
+        $deliveryCharge = $request->json()->get('deliveryCharge');
 
         $order = new Order;
         $order->clientId = $userId;
         $order->restaurantId = $restaurantId;
         $order->deliveryAddress = $optionalAddress;
+        $order->deliveryCharge = $deliveryCharge    ;
         $order->status = 0;
 
         $order->save();
@@ -110,6 +112,40 @@ class OrderController extends Controller
         }
 
         return response()->json($transactionId);
+    }
+
+    public function updateOrder(Request $request){
+        $transactionId = $request->json()->get('transactionId');
+        $menuToRemove = $request->json()->get('oldOrder');
+        $newOrderList = $request->json()->get('newOrder');
+
+        for ($i=0; $i < count($menuToRemove); $i++) { 
+            $foodOrder = DB::table('food_orders')
+                        ->where('transactionId','=', $transactionId)
+                        ->where('menuId','=', $menuToRemove[$i]['menuId'])
+                        ->update(['menuId' => $newOrderList[$i]['menuId'], 'quantity' => $newOrderList[$i]['quantity']]);
+        }
+
+        // if(count($newOrderList) >= count($menuToRemove)){
+        //     $diff = count($newOrderList ) - count($menuToRemove);
+        //     for ($i=0; $i < count($menuToRemove); $i++) { 
+        //         $foodOrder = DB::table('food_orders')
+        //                     ->where('transactionId','=', $transactionId)
+        //                     ->where('menuId','=', $menuToRemove[$i]['menuId'])
+        //                     ->update(['menuId' => $newOrderList[$i]['menuId'], 'quantity' => $newOrderList[$i]['quantity']]);
+        //     }
+
+        //     if($foodOrder != 0){
+        //         for ($i=$diff; $i < count($newOrderList); $i++) { 
+        //         $newOrder = DB::table('food_orders')
+        //             ->insert(['transactionId' => $transactionId, 
+        //                         'menuId' => $newOrderList[$i]['menuId'], 
+        //                         'quantity' => $newOrderList[$i]['quantity']]);
+        //         }
+        //     }         
+        // }
+        if($foodOrder==1)return response()->json(true);
+        else return response()->json(false);
     }
 
     public function getOrdersPerTransaction($id){
@@ -156,5 +192,35 @@ class OrderController extends Controller
             return response()->json(false);
         }
         
+    }
+    public function transactionComplete($id){
+        $order = Order::find($id);
+        $order->status = 4;
+        if($order->save()){
+            return response()->json(true);
+        }
+        else{
+            return response()->json(false);
+        }
+    }
+    public function transactionDelivery($id){
+        $order = Order::find($id);
+        $order->status = 3;
+        if($order->save()){
+            return response()->json(true);
+        }
+        else{
+            return response()->json(false);
+        }
+    }
+    public function transactionBuying($id){
+        $order = Order::find($id);
+        $order->status = 2;
+        if($order->save()){
+            return response()->json(true);
+        }
+        else{
+            return response()->json(false);
+        }
     }
 }
