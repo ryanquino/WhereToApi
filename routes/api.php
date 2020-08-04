@@ -22,6 +22,8 @@ Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransactio
 Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails');
 Route::get('viewCurrentOrders/{id}', 'OrderController@viewCurrentOrders');
 Route::get('getAllPlayerId', 'UserController@getAllRiderPlayerId');
+Route::get('getBarangayList', 'BaranggayController@getBarangayList');
+Route::get('getRiderComments/{id}', 'UserController@getRiderComments');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('goOffline/{id}', 'UserController@goOffline');
 Route::post('register', 'UserController@register');
@@ -32,6 +34,7 @@ Route::post('transactionComplete/{id}', 'OrderController@transactionComplete');
 Route::post('transactionBuying/{id}', 'OrderController@transactionBuying');
 Route::post('transactionDelivery/{id}', 'OrderController@transactionDelivery');
 Route::post('updateOrder', 'OrderController@updateOrder');
+Route::post('addRiderComment', 'UserController@commentRider');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
 

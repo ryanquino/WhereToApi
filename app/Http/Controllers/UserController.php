@@ -162,8 +162,34 @@ class UserController extends Controller
                         ->select('notification_device.deviceId')
                         ->where('userType', '=', 1)
                         ->get();
+
         return response()->json($details);
 
+    }
+
+    public function rateRider(Request $request){
+        $riderId = $request->json()->get('riderId');
+        $rating = $request->json()->get('rating');
+
+        $rate = DB::table('rider_details')->insert(
+                    ['riderId' => $riderId, 'starRating' => $rating]
+                );
+
+    }
+
+    public function commentRider(Request $request){
+        $riderId = $request->json()->get('riderId');
+        $comment = $request->json()->get('comment');
+
+        $comment = DB::table('rider_comments')->insert(
+                    ['riderId' => $riderId, 'comment' => $comment]
+                );
+    }
+
+    public function getRiderComments($id){
+        $comments = DB::table('rider_comments')->select('comment')->where('riderId','=',$id)->get();
+
+        return response()->json($comments);
 
     }
 }
