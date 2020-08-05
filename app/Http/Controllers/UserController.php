@@ -41,7 +41,8 @@ class UserController extends Controller
             'address' => $request->json()->get('address'),
             'password' => Hash::make($request->json()->get('password')),
             'status' => 1,
-            'userType' => 0
+            'userType' => 0,
+            'barangayId' => $request->json()->get('barangayId')
         ]);
 
         $token = JWTAuth::fromUser($user);
