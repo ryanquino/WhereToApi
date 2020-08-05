@@ -206,7 +206,15 @@ class OrderController extends Controller
     public function transactionComplete($id){
         $order = Order::find($id);
         $order->status = 4;
+
+
         if($order->save()){
+            $menus = DB::table('food_orders')->select('menuId', 'quantity')->where('transactionId','=',$id)->get();
+            $menuList = json_decode($menus);
+
+            for ($i=0; $i < count($menuList); $i++) { 
+                $increment = DB::table('menu')->where('id','=',$menuList[$i]->menuId)->increment('timesBought', $menuList[$i]->quantity);
+            }
             return response()->json(true);
         }
         else{
