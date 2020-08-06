@@ -170,12 +170,30 @@ class UserController extends Controller
 
     public function rateRider(Request $request){
         $riderId = $request->json()->get('riderId');
-        $rating = $request->json()->get('rating');
+        $currentRating = $request->json()->get('rating');
 
-        $rate = DB::table('rider_details')->insert(
-                    ['riderId' => $riderId, 'starRating' => $rating]
-                );
+        $rate = DB::table('rider_details')->select('starRating', 'rateCount')->where('riderId','=',$riderId)->get();
 
+
+        $rating = $rate[0]->starRating + $currentRating;
+        $rateCount = $rate[0]->rateCount + 1;
+
+        $rate = DB::table('rider_details')
+                    ->where('riderId', $riderId)
+                    ->update(
+                        ['starRating' => round($rating), 'rateCount' => $rate[0]->rateCount+1]
+                    );
+
+        return response()->json($average);       
+
+    }
+
+    public function getRiderRating($id){
+        $rate = DB::table('rider_details')->select('starRating', 'rateCount')->where('riderId','=',$id)->get();
+
+        $average = $rate[0]->starRating/$rate[0]->rateCount;
+
+        return response()->json($average);    
     }
 
     public function commentRider(Request $request){
@@ -193,4 +211,5 @@ class UserController extends Controller
         return response()->json($comments);
 
     }
+
 }
