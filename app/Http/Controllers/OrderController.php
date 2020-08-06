@@ -172,12 +172,11 @@ class OrderController extends Controller
 
     }
 
-    public function viewCurrentOrders($id){
+    public function viewUserOrders($id){
         $currentOrders = DB::table('transactions')
                 ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
                 ->select('transactions.id','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'transactions.riderId', 'transactions.status')
                 ->where('transactions.clientId', '=', $id)
-                ->where('transactions.status', '<>', 4)
                 ->get();
 
         return response()->json($currentOrders);

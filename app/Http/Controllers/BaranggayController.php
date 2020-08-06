@@ -84,7 +84,7 @@ class BaranggayController extends Controller
     }
 
     public function getBarangayList(){
-        $list = Barangay::all()->pluck('barangayName');
+        $list = Barangay::all();
 
         return response()->json($list);
     }

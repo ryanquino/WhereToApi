@@ -20,10 +20,11 @@ Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
 Route::get('getMenuCategory/{id}', 'MenuController@getMenuCategory');
 Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransaction');
 Route::get('getTransactionDetails/{id}', 'OrderController@getTransactionDetails');
-Route::get('viewCurrentOrders/{id}', 'OrderController@viewCurrentOrders');
+Route::get('viewUserOrders/{id}', 'OrderController@viewUserOrders');
 Route::get('getAllPlayerId', 'UserController@getAllRiderPlayerId');
 Route::get('getBarangayList', 'BaranggayController@getBarangayList');
 Route::get('getRiderComments/{id}', 'UserController@getRiderComments');
+Route::get('getRiderRating/{id}', 'UserController@getRiderRating');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('goOffline/{id}', 'UserController@goOffline');
 Route::post('register', 'UserController@register');
@@ -35,6 +36,8 @@ Route::post('transactionBuying/{id}', 'OrderController@transactionBuying');
 Route::post('transactionDelivery/{id}', 'OrderController@transactionDelivery');
 Route::post('updateOrder', 'OrderController@updateOrder');
 Route::post('addRiderComment', 'UserController@commentRider');
+Route::post('rateRider', 'UserController@rateRider');
+
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
 
