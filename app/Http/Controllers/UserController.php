@@ -50,7 +50,6 @@ class UserController extends Controller
             return response()->json([
                 'success'=> true,
                 'user'=> $user,
-                'userType'=>$user['userType'],
                 'token' =>$token]);
            
            
@@ -77,6 +76,7 @@ class UserController extends Controller
         return response()->json([
             'success'=> true,
             'user'=> $user,
+            'userType'=>$user['userType'],
             'token' =>$token
            
 
