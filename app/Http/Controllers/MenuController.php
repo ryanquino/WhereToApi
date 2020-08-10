@@ -39,6 +39,7 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -97,6 +98,12 @@ class MenuController extends Controller
 
         return response()->json($menu);
     }
-
+    public function addMenu(Request $request){
+        $restoId = $request->json()->get('restaurantId');
+        $menu = $request->json()->get('menu');
+        for ($i=0; $i < count($menu); $i++) { 
+            $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
+        }
+    }
 
 }

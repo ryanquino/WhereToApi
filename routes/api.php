@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::get('getFeaturedRestaurant', 'RestaurantController@getFeaturedRestaurant');
 Route::get('getCategories', 'CategoryController@getCaregoryList');
 Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
@@ -37,6 +36,11 @@ Route::post('transactionDelivery/{id}', 'OrderController@transactionDelivery');
 Route::post('updateOrder', 'OrderController@updateOrder');
 Route::post('addRiderComment', 'UserController@commentRider');
 Route::post('rateRider', 'UserController@rateRider');
+
+//admin side
+Route::post('addRider', 'UserController@addRider');
+Route::post('addRestaurant', 'RestaurantController@addRestaurant');
+Route::post('addMenu', 'MenuController@addMenu');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
