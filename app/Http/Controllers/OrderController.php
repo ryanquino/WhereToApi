@@ -92,12 +92,14 @@ class OrderController extends Controller
         $orderList = $request->json()->get('order');
         $optionalAddress = $request->json()->get('deliveryAddress');
         $deliveryCharge = $request->json()->get('deliveryCharge');
+        $barangayId = $request->json()->get('barangayId');
 
         $order = new Order;
         $order->clientId = $userId;
         $order->restaurantId = $restaurantId;
         $order->deliveryAddress = $optionalAddress;
-        $order->deliveryCharge = $deliveryCharge    ;
+        $order->deliveryCharge = $deliveryCharge;
+        $order->barangayId = $barangayId;
         $order->status = 0;
 
         $order->save();
@@ -164,7 +166,7 @@ class OrderController extends Controller
             ->join('users', 'users.id', '=', 'transactions.clientId')
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
             ->join('notification_device', 'users.id', '=', 'notification_device.userId')
-            ->join('barangay', 'barangay.id', '=', 'users.barangayId')
+            ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
             ->select('transactions.id','users.name', 'barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
             ->where('transactions.id', '=', $id)
             ->get();
