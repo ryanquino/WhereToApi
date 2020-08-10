@@ -21,29 +21,29 @@ class UserController extends Controller
         public function register(Request $request)
     {
             $validator = Validator::make($request->json()->all() , [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|max:55|unique:users',
-            'contactNumber' => 'required|string|max:11|unique:users',
-            'address' => 'required|string|max:255',
-            'password' => 'required|string|min:6', 
-        ]);
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|max:55|unique:users',
+                'contactNumber' => 'required|string|max:11|unique:users',
+                'address' => 'required|string|max:255',
+                'password' => 'required|string|min:6', 
+            ]);
 
-        if($validator->fails()){
-                return response()->json(
-                    $validator->errors()->toJson(), 400,
-                );
-        }
+            if($validator->fails()){
+                    return response()->json(
+                        $validator->errors()->toJson(), 400,
+                    );
+            }
 
-        $user = User::create([
-            'name' => $request->json()->get('name'),
-            'email' => $request->json()->get('email'),
-            'contactNumber' => $request->json()->get('contactNumber'),
-            'address' => $request->json()->get('address'),
-            'password' => Hash::make($request->json()->get('password')),
-            'status' => 1,
-            'userType' => 0,
-            'barangayId' => $request->json()->get('barangayId')
-        ]);
+            $user = User::create([
+                'name' => $request->json()->get('name'),
+                'email' => $request->json()->get('email'),
+                'contactNumber' => $request->json()->get('contactNumber'),
+                'address' => $request->json()->get('address'),
+                'password' => Hash::make($request->json()->get('password')),
+                'status' => 1,
+                'userType' => 0,
+                'barangayId' => $request->json()->get('barangayId')
+            ]);
 
         $token = JWTAuth::fromUser($user);
            
@@ -210,6 +210,13 @@ class UserController extends Controller
 
         return response()->json($comments);
 
+    }
+    public function addRider(Request $request){
+        $riderId = $request->json()->get('riderId');
+        $licenseNumber = $request->json()->get('licenseNumber');
+        $plateNumber = $request->json()->get('plateNumber');
+
+        $addRiderDetails = DB::table('rider_details')->insert(['riderId' => $riderId, 'licenseNumber' => $licenseNumber, 'plateNumber' => $plateNumber]);
     }
 
 }

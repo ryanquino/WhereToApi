@@ -164,7 +164,8 @@ class OrderController extends Controller
             ->join('users', 'users.id', '=', 'transactions.clientId')
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
             ->join('notification_device', 'users.id', '=', 'notification_device.userId')
-            ->select('transactions.id','users.name','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
+            ->join('barangay', 'barangay.id', '=', 'users.barangayId')
+            ->select('transactions.id','users.name', 'barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
             ->where('transactions.id', '=', $id)
             ->get();
 

@@ -36,6 +36,31 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->json()->all() , [
+                'restaurantName' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'contactNumber' => 'required|string|max:11'
+            ]);
+        if($validator->fails()){
+                return response()->json(
+                    $validator->errors()->toJson(), 400,
+                );
+        }
+        $resto = new Restaurant;
+
+        $resto->restaurantName = $request->json()->get('restaurantName');
+        $resto->address = $request->json()->get('address');
+        $resto->contactNumber = $request->json()->get('contactNumber');
+        $resto->openTime = $request->json()->get('openTime');
+        $resto->closingTime = $request->json()->get('closingTime');
+        $resto->closeOn = $request->json()->get('closeOn');
+        $resto->isFeatured = $request->json()->get('closeOn');
+        $resto->status = 1;
+        $resto->save();
+
+        $restaurantId = $resto->id;
+
+        return response()->json($restaurantId);
     }
 
     /**
@@ -95,7 +120,6 @@ class RestaurantController extends Controller
         $menu = Restaurant::find($id)->menu;
 
         return response()->json($menu);
-
 
     }
 
