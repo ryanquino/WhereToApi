@@ -220,4 +220,12 @@ class UserController extends Controller
         $addRiderDetails = DB::table('rider_details')->insert(['riderId' => $riderId, 'licenseNumber' => $licenseNumber, 'plateNumber' => $plateNumber]);
     }
 
+    public function getRiderDetails($id){
+        $rider = DB::table('rider_details')
+            ->select('plateNumber', 'licenseNumber')
+            ->where('riderId', '=', $id)->get();
+
+        return response()->json($rider);  
+    }
+
 }
