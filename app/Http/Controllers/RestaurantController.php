@@ -54,7 +54,7 @@ class RestaurantController extends Controller
         $resto->openTime = $request->json()->get('openTime');
         $resto->closingTime = $request->json()->get('closingTime');
         $resto->closeOn = $request->json()->get('closeOn');
-        $resto->isFeatured = $request->json()->get('closeOn');
+        $resto->isFeatured = $request->json()->get('isFeatured');
         $resto->status = 1;
         $resto->save();
 
@@ -110,7 +110,10 @@ class RestaurantController extends Controller
 
     public function getFeaturedRestaurant(){
 
-        $featuredResto = DB::table('restaurants')->where('isFeatured', '=', 1)->get();
+        $featuredResto = DB::table('restaurants')
+            ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber')
+            ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
+            ->where('isFeatured', '=', 1)->get();
 
         return response()->json($featuredResto);
     }
