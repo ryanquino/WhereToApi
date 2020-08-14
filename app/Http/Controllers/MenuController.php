@@ -102,7 +102,20 @@ class MenuController extends Controller
         $restoId = $request->json()->get('restaurantId');
         $menu = $request->json()->get('menu');
         for ($i=0; $i < count($menu); $i++) { 
-            $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
+            $category = $menu[$i]['category'];
+            $addMenu = new Menu;
+            $addMenu->restaurant_id = $restoId;
+            $addMenu->menuName = $menu[$i]['menuName'];
+            $addMenu->description = $menu[$i]['description'];
+            $addMenu->price = $menu[$i]['price'];
+            $addMenu->save();
+            // $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
+            for ($j=0; $j <count($category) ; $j++) { 
+                # code...
+                $addCategory = DB::table('menu_categories')
+                    ->insert(['menuId' => $addMenu->id, 'categoryId' => $category[$j]['id']]);   
+            }
+
         }
     }
 
