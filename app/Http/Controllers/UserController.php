@@ -78,8 +78,6 @@ class UserController extends Controller
             'user'=> $user,
             'userType'=>$user['userType'],
             'token' =>$token
-           
-
         ]);
     }
 
