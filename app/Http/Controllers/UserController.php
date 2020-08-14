@@ -212,11 +212,23 @@ class UserController extends Controller
         return response()->json($comments);
 
     }
-    public function addRider(Request $request){
-        $riderId = $request->json()->get('riderId');
+    public function addRider(Request $request){        
+        $rider = new User;
+
+        $rider->name = $request->json()->get('name');
+        $rider->email = $request->json()->get('email');
+        $rider->contactNumber = $request->json()->get('contactNumber');
+        $rider->address = $request->json()->get('address');
+        $rider->barangayId = $request->json()->get('barangayId');
+        $rider->password = Hash::make("temppass");
+        $rider->status = 0;
+        $rider->userType = 1;
+
+        $rider->save();
+
+        $riderId = $rider->id;
         $licenseNumber = $request->json()->get('licenseNumber');
         $plateNumber = $request->json()->get('plateNumber');
-
         $addRiderDetails = DB::table('rider_details')->insert(['riderId' => $riderId, 'licenseNumber' => $licenseNumber, 'plateNumber' => $plateNumber]);
     }
 
@@ -226,6 +238,21 @@ class UserController extends Controller
             ->where('riderId', '=', $id)->get();
 
         return response()->json($rider);  
+    }
+
+    public function changePassword(){
+        $validator = Validator::make($request->json()->all() , [
+                'password' => 'required|string|min:6', 
+            ]);
+
+        if($validator->fails()){
+                    return response()->json(
+                        $validator->errors()->toJson(), 400,
+                    );
+            }
+        $userId = $request->json()->get('userId');
+        $user = User::where('id', $userId)
+          ->update(['password' => Hash::make($request->json()->get('password'))]);
     }
 
 }
