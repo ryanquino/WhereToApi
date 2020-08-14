@@ -239,4 +239,19 @@ class UserController extends Controller
         return response()->json($rider);  
     }
 
+    public function changePassword(){
+        $validator = Validator::make($request->json()->all() , [
+                'password' => 'required|string|min:6', 
+            ]);
+
+        if($validator->fails()){
+                    return response()->json(
+                        $validator->errors()->toJson(), 400,
+                    );
+            }
+        $userId = $request->json()->get('userId');
+        $user = User::where('id', $userId)
+          ->update(['password' => Hash::make($request->json()->get('password'))]);
+    }
+
 }
