@@ -40,7 +40,7 @@ Route::post('rateRider', 'UserController@rateRider');
 
 //admin side
 Route::post('addRider', 'UserController@addRider');
-Route::post('addRestaurant', 'RestaurantController@addRestaurant');
+Route::post('addRestaurant', 'RestaurantController@store');
 Route::post('addMenu', 'MenuController@addMenu');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
