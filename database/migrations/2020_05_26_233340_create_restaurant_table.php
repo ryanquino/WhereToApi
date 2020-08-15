@@ -17,8 +17,8 @@ class CreateRestaurantTable extends Migration
             $table->id();
             $table->string('restaurantName');
             $table->string('address');
+            $table->integer('barangayId');
             $table->string('contactNumber');
-            $table->string('name');
             $table->time('openTime');
             $table->time('closingTime');
             $table->string('closeOn');

@@ -20,7 +20,6 @@ class CreateFoodOrdersTable extends Migration
             $table->integer('quantity');
             $table->foreign('transactionId')->references('id')->on('transactions');
             $table->foreign('menuId')->references('id')->on('menu');
-            $table->timestamps();
         });
     }
 

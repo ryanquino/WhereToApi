@@ -17,9 +17,13 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->integer('clientId');
             $table->integer('riderId');
-            $table->integer('paymentType');
+            $table->integer('restaurantId');
+            $table->string('deliveryAddress');
+            $table->double('deliveryCharge')->default('0');
+            $table->integer('status')->default('0');
             $table->foreign('clientId')->references('id')->on('users');
             $table->foreign('riderId')->references('id')->on('users');
+            $table->foreign('restaurantId')->references('id')->on('restaurants');
             $table->timestamps();
         });
     }

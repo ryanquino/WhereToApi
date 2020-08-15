@@ -19,6 +19,8 @@ class CreateMenuTable extends Migration
             $table->string('menuName');
             $table->string('description');
             $table->double('price');
+            $table->integer('timesBought')->default('0');
+            $table->timestamps();
             $table->foreign('restaurantId')->references('id')->on('restaurant');
         });
     }
