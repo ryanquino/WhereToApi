@@ -25,6 +25,7 @@ Route::get('getBarangayList', 'BaranggayController@getBarangayList');
 Route::get('getRiderComments/{id}', 'UserController@getRiderComments');
 Route::get('getRiderRating/{id}', 'UserController@getRiderRating');
 Route::get('getRiderDetails/{id}', 'UserController@getRiderDetails');
+Route::get('getAllMenu', 'MenuController@getAllMenu');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('goOffline/{id}', 'UserController@goOffline');
 Route::post('register', 'UserController@register');
