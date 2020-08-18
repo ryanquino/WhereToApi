@@ -124,7 +124,7 @@ class MenuController extends Controller
             ->join('menu_categories', 'menu_categories.menuId', '=', 'menu.id')
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select('menu.id', 'restaurants.restaurantName', 'menu.menuName', 'categories.categoryName')->get();
+            ->select('menu.id', 'restaurants.id','restaurants.restaurantName', 'menu.menuName', 'categories.categoryName')->get();
             
         return response()->json($menu);
     }
