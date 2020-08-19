@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('getFeaturedRestaurant', 'RestaurantController@getFeaturedRestaurant');
+Route::get('getMenuPerRestaurant', 'RestaurantController@getMenuPerRestaurant');
 Route::get('getCategories', 'CategoryController@getCaregoryList');
 Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
 Route::get('getMenuCategory/{id}', 'MenuController@getMenuCategory');
