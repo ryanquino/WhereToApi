@@ -125,7 +125,8 @@ class MenuController extends Controller
             ->join('menu_categories', 'menu_categories.menuId', '=', 'menu.id')
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select('menu.id', 'restaurants.id','restaurants.restaurantName','restaurants.address', 'menu.menuName', 'categories.categoryName', 'menu.imagePath')->get();
+            ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
+            ->select('menu.id', 'restaurants.id','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'categories.categoryName', 'menu.imagePath')->get();
             
         return response()->json($menu);
     }
@@ -133,8 +134,8 @@ class MenuController extends Controller
     public function getMenuPerRestaurant($id){
         $menuList = DB::table('menu')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->select('menu.id', 'menu.menuName', 'barangay.barangayName','menu.description', 'menu.price', 'menu.imagePath')
+            
+            ->select('menu.id', 'menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
             ->where('restaurants.id', '=', $id)->get();
 
          return response()->json($menuList);   
