@@ -133,7 +133,8 @@ class MenuController extends Controller
     public function getMenuPerRestaurant($id){
         $menuList = DB::table('menu')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select('menu.id', 'menu.menuName', 'menu.description', 'menu.price', 'menu.imagePath')
+            ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
+            ->select('menu.id', 'menu.menuName', 'barangay.barangayName','menu.description', 'menu.price', 'menu.imagePath')
             ->where('restaurants.id', '=', $id)->get();
 
          return response()->json($menuList);   
