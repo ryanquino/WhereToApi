@@ -92,7 +92,7 @@ class MenuController extends Controller
             ->join('menu_categories', 'menu.id', '=', 'menu_categories.menuId')
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select('menu.id','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price')
+            ->select('menu.id', 'restaurants.id','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
             ->where('categoryId' , '=', $id)
             ->get();
 
@@ -108,6 +108,7 @@ class MenuController extends Controller
             $addMenu->menuName = $menu[$i]['menuName'];
             $addMenu->description = $menu[$i]['description'];
             $addMenu->price = $menu[$i]['price'];
+            $addMenu->price = $menu[$i]['imagePath'];
             $addMenu->save();
             // $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
             for ($j=0; $j <count($category) ; $j++) { 
@@ -124,7 +125,7 @@ class MenuController extends Controller
             ->join('menu_categories', 'menu_categories.menuId', '=', 'menu.id')
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select('menu.id', 'restaurants.id','restaurants.restaurantName', 'menu.menuName', 'categories.categoryName')->get();
+            ->select('menu.id', 'restaurants.id','restaurants.restaurantName', 'menu.menuName', 'categories.categoryName', 'menu.imagePath')->get();
             
         return response()->json($menu);
     }

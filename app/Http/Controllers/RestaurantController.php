@@ -57,6 +57,7 @@ class RestaurantController extends Controller
         $resto->closingTime = $request->json()->get('closingTime');
         $resto->closeOn = $request->json()->get('closeOn');
         $resto->isFeatured = $request->json()->get('isFeatured');
+        $resto->imagePath = $request->json()->get('imagePath');
         $resto->status = 1;
         $resto->save();
 
@@ -113,7 +114,7 @@ class RestaurantController extends Controller
     public function getFeaturedRestaurant(){
 
         $featuredResto = DB::table('restaurants')
-            ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber')
+            ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber', 'restaurants.imagePath')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
             ->where('isFeatured', '=', 1)->get();
 
