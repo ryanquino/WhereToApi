@@ -108,7 +108,7 @@ class MenuController extends Controller
             $addMenu->menuName = $menu[$i]['menuName'];
             $addMenu->description = $menu[$i]['description'];
             $addMenu->price = $menu[$i]['price'];
-            $addMenu->price = $menu[$i]['imagePath'];
+            $addMenu->imagePath = $menu[$i]['imagePath'];
             $addMenu->save();
             // $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
             for ($j=0; $j <count($category) ; $j++) { 
