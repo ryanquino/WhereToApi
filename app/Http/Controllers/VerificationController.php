@@ -94,18 +94,12 @@ class VerificationController extends Controller
         $userId = $request->json()->get('userId');
         $imagePath = $request->json()->get('imagePath');
 
-        // $verification = new Verification;
-        // $verification->imagePath = $imagePath;
-        // $verification->isVerified = 0;
-
-        // $user = User::find($userId);
-        // $user->verification()->save($verification);
+        $verification = new Verification;
+        $verification->imagePath = $imagePath;
+        $verification->isVerified = 0;
 
         $user = User::find($userId);
-
-        $user->verification()->save([
-            new Verification(['imagePath' => $imagePath, 'isVerified' => 0])
-        ]);
+        $user->verification()->save($verification);
 
     }
 }
