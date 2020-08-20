@@ -86,7 +86,6 @@ class VerificationController extends Controller
 
     public function verifyUser($id){
         $verification = Verification::where('userId', $id)
-          ->where('destination', 'San Diego')
           ->update(['isVerified' => 1]);
     }
 
