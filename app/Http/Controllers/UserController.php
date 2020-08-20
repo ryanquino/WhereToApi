@@ -42,7 +42,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->json()->get('password')),
                 'status' => 1,
                 'userType' => 0,
-                'barangayId' => $request->json()->get('barangayId')
+                'barangayId' => $request->json()->get('barangayId'),
             ]);
 
         $token = JWTAuth::fromUser($user);
@@ -252,5 +252,7 @@ class UserController extends Controller
         $user = User::where('id', $userId)
           ->update(['password' => Hash::make($request->json()->get('password'))]);
     }
+
+
 
 }

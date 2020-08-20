@@ -40,4 +40,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne('App\PushNotificationDevice');
     }
+    public function verification(){
+         return $this->hasOne('App\Verification');
+    }
 }
