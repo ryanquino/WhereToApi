@@ -101,4 +101,14 @@ class VerificationController extends Controller
         $user->verification()->save($verification);
 
     }
+
+    public function getUnverifiedList(){
+        $verificationList = DB::table('verification')
+            ->join('users', 'users.id', '=', 'verification.userId')
+            ->where('isVerified', 0)
+            ->select('verification.userId', 'users.name', 'verification.imagePath')
+            ->get();
+
+        return response()->json($verificationList);
+    }
 }
