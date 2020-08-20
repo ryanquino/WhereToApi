@@ -102,6 +102,16 @@ class VerificationController extends Controller
 
     }
 
+    public function viewUserVerification($id){
+        $user = DB::table('verification')
+            ->join('users', 'users.id', '=', 'verification.userId')
+            ->where('verification.userId', $id)
+            ->select('verification.userId', 'users.name', 'verification.imagePath','verification.isVerified')
+            ->get();
+
+        return response()->json($user);
+    }
+
     public function getUnverifiedList(){
         $verificationList = DB::table('verification')
             ->join('users', 'users.id', '=', 'verification.userId')
