@@ -90,7 +90,7 @@ class VerificationController extends Controller
         $user->save();
     }
 
-    public function submitVerification(){
+    public function submitVerification(Request $request){
         $userId = $request->json()->get('userId');
         $imagePath = $request->json()->get('imagePath');
 
