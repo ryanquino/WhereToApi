@@ -85,9 +85,9 @@ class VerificationController extends Controller
     }
 
     public function verifyUser($id){
-        $user = User::find($id);
-        $user->isVerified = 1;
-        $user->save();
+        $verification = Verification::where('userId', $id)
+          ->where('destination', 'San Diego')
+          ->update(['isVerified' => 1]);
     }
 
     public function submitVerification(Request $request){

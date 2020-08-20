@@ -45,7 +45,7 @@ Route::post('addRider', 'UserController@addRider');
 Route::post('addRestaurant', 'RestaurantController@store');
 Route::post('addMenu', 'MenuController@addMenu');
 Route::post('submitVerification', 'VerificationController@submitVerification');
-Route::post('verifyUser', 'VerificationController@verifyUser');
+Route::post('verifyUser/{id}', 'VerificationController@verifyUser');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
