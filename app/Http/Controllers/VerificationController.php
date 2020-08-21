@@ -134,7 +134,7 @@ class VerificationController extends Controller
     }
 
     public function isAccountSuspended($id){
-        $isSuspended = DB::table('verification')->where('userId',$id)->select('isSuspended')->get();
+        $isSuspended = Verification::where('userId', $id)->pluck('isSuspended');
 
         if($isSuspended == 1)return response()->json(true);
         else response()->json(false);
