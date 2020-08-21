@@ -87,6 +87,9 @@ class VerificationController extends Controller
     public function verifyUser($id){
         $verification = Verification::where('userId', $id)
           ->update(['isVerified' => 1]);
+
+        if($verification)response()->json(true);
+        else response()->json(false);
     }
 
     public function submitVerification(Request $request){
@@ -120,5 +123,20 @@ class VerificationController extends Controller
             ->get();
 
         return response()->json($verificationList);
+    }
+
+    public function suspendAccount($id){
+        $verification = Verification::where('userId', $id)
+          ->update(['isSuspended' => 1]);
+
+        if($verification)return response()->json(true);
+        else response()->json(false);
+    }
+
+    public function isAccountSuspended($id){
+        $isSuspended = Verification::where('userId', $id)->first()->isSuspended;
+
+        if($isSuspended == 1)return response()->json(true);
+        else response()->json(false);
     }
 }

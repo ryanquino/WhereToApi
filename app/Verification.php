@@ -11,7 +11,7 @@ class Verification extends Model
     protected $table = 'verification';
 
     protected $fillable = [
-        'userId', 'imagePath', 'isVerified'
+        'userId', 'imagePath', 'isVerified', 'isSuspended'
     ];
     public function user()
     {

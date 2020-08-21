@@ -43,4 +43,9 @@ class User extends Authenticatable implements JWTSubject
     public function verification(){
          return $this->hasOne('App\Verification', 'userId');
     }
+
+    public function remittance()
+    {
+        return $this->hasOne('App\Remittance');
+    }
 }

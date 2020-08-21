@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\PushNotificationDevice;
+use App\Remittance;
 Use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -167,6 +168,16 @@ class UserController extends Controller
 
     }
 
+    public function getUserDeviceId($id){
+        $details = DB::table('notification_device')
+                        ->select('notification_device.deviceId')
+                        ->where('userId', '=', $id)
+                        ->get();
+
+        return response()->json($details);
+
+    }
+
     public function rateRider(Request $request){
         $riderId = $request->json()->get('riderId');
         $currentRating = $request->json()->get('rating');
@@ -252,6 +263,7 @@ class UserController extends Controller
         $user = User::where('id', $userId)
           ->update(['password' => Hash::make($request->json()->get('password'))]);
     }
+
 
 
 
