@@ -83,7 +83,7 @@ class RemitController extends Controller
         //
     }
 
-    puglic function riderRemit(){
+    public function riderRemit(){
         $riderId = $request->json()->get('riderId');
         $imagePath = $request->json()->get('imagePath');
         $remit = new Remittance;
