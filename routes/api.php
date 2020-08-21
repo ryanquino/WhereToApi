@@ -39,7 +39,7 @@ Route::post('transactionDelivery/{id}', 'OrderController@transactionDelivery');
 Route::post('updateOrder', 'OrderController@updateOrder');
 Route::post('addRiderComment', 'UserController@commentRider');
 Route::post('rateRider', 'UserController@rateRider');
-
+Route::post('riderRemit', 'RemitController@riderRemit');
 //admin side
 Route::post('addRider', 'UserController@addRider');
 Route::post('addRestaurant', 'RestaurantController@store');
@@ -48,8 +48,11 @@ Route::post('submitVerification', 'VerificationController@submitVerification');
 Route::post('verifyUser/{id}', 'VerificationController@verifyUser');
 Route::post('suspendAccount/{id}', 'VerificationController@suspendAccount');
 Route::post('isAccountSuspended/{id}', 'VerificationController@isAccountSuspended');
+Route::post('approveRemittance/{id}', 'RemitController@approveRemittance');
 Route::get('getUnverifiedList', 'VerificationController@getUnverifiedList');
 Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerification');
+Route::get('viewRiderRemittance/{id}', 'RemitController@viewRiderRemittance');
+
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
