@@ -98,6 +98,7 @@ class RemitController extends Controller
         $remittance = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.riderId', 'users.name', 'remittance.imagePath')
+            ->where('remittance.status', 0)
             ->get();
 
         return response()->json($remittance);
