@@ -118,7 +118,7 @@ class VerificationController extends Controller
     public function getUnverifiedList(){
         $verificationList = DB::table('verification')
             ->join('users', 'users.id', '=', 'verification.userId')
-            ->where(['isVerified' => 0, 'isSuspended' = 0])
+            ->where(['isVerified' => 0, 'isSuspended' => 0])
             ->select('verification.userId', 'users.name', 'verification.imagePath')
             ->get();
 
