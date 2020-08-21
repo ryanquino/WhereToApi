@@ -126,7 +126,7 @@ class MenuController extends Controller
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->select('menu.id as menuId', 'restaurants.id','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'categories.categoryName', 'menu.imagePath')->get();
+            ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'categories.categoryName', 'menu.imagePath')->get();
             
         return response()->json($menu);
     }

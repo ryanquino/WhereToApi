@@ -95,7 +95,7 @@ class RemitController extends Controller
     }
 
     public function viewRiderRemittance($id){
-        $remittance = Remittance::where('riderId', $id)->first();
+        $remittance = Remittance::all();
 
         return response()->json($remittance);
     }
