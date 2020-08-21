@@ -137,6 +137,6 @@ class VerificationController extends Controller
         $isSuspended = Verification::where('userId', $id)->first()->isSuspended;
 
         if($isSuspended == 1)return response()->json(true);
-        else response()->json(false);
+        else if($isSuspended == 0) response()->json(false);
     }
 }
