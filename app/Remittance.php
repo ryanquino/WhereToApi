@@ -10,7 +10,7 @@ class Remittance extends Model
     protected $table = 'remittance';
 
     protected $fillable = [
-        'userId', 'imagePath', 'status'
+        'riderId', 'imagePath', 'status'
     ];
 
     public function user()
