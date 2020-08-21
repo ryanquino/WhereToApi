@@ -94,8 +94,11 @@ class RemitController extends Controller
         $remit->save();
     }
 
-    public function viewRiderRemittance($id){
-        $remittance = Remittance::all();
+    public function viewRiderRemittance(){
+        $remittance = DB::table('remittance')
+            ->join('users', 'users.id', '=', 'remittance.usersId')
+            ->select('remittance.userId', 'users.name', 'remittance.imagePath')
+            ->get();
 
         return response()->json($remittance);
     }

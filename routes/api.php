@@ -52,7 +52,7 @@ Route::get('isAccountSuspended/{id}', 'VerificationController@isAccountSuspended
 Route::post('approveRemittance/{id}', 'RemitController@approveRemittance');
 Route::get('getUnverifiedList', 'VerificationController@getUnverifiedList');
 Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerification');
-Route::get('viewRiderRemittance/{id}', 'RemitController@viewRiderRemittance');
+Route::get('viewRiderRemittance', 'RemitController@viewRiderRemittance');
 
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
