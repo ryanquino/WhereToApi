@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Remittance;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class RemitController extends Controller
 {
     /**
@@ -83,7 +83,7 @@ class RemitController extends Controller
         //
     }
 
-    public function riderRemit(){
+    public function riderRemit(Request $request){
         $riderId = $request->json()->get('riderId');
         $imagePath = $request->json()->get('imagePath');
         $remit = new Remittance;
