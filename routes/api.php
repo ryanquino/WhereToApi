@@ -47,7 +47,7 @@ Route::post('addMenu', 'MenuController@addMenu');
 Route::post('submitVerification', 'VerificationController@submitVerification');
 Route::post('verifyUser/{id}', 'VerificationController@verifyUser');
 Route::post('suspendAccount/{id}', 'VerificationController@suspendAccount');
-Route::post('isAccountSuspended/{id}', 'VerificationController@isAccountSuspended');
+Route::get('isAccountSuspended/{id}', 'VerificationController@isAccountSuspended');
 Route::post('approveRemittance/{id}', 'RemitController@approveRemittance');
 Route::get('getUnverifiedList', 'VerificationController@getUnverifiedList');
 Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerification');
