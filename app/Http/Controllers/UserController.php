@@ -178,6 +178,17 @@ class UserController extends Controller
 
     }
 
+    public function getAllAdminDeviceId(){
+        $details = DB::table('users')
+                        ->join('notification_device', 'users.id', '=', 'notification_device.userId')
+                        ->select('notification_device.deviceId')
+                        ->where('users.userType', '=', 2)
+                        ->get();
+
+        return response()->json($details);
+
+    }
+
     public function rateRider(Request $request){
         $riderId = $request->json()->get('riderId');
         $currentRating = $request->json()->get('rating');
