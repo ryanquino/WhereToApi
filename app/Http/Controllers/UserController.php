@@ -272,7 +272,6 @@ class UserController extends Controller
                     );
             }
         $userId = $request->json()->get('userId');
-        $isCorrectPassword::
         $user = User::where('id', $userId)
           ->update(['password' => Hash::make($request->json()->get('password'))]);
     }
