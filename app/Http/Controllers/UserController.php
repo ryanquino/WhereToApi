@@ -265,7 +265,7 @@ class UserController extends Controller
         $validator = Validator::make($request->json()->all() , [
                 'password' => 'required|string|min:6', 
             ]);
- v
+
         if($validator->fails()){
                     return response()->json(
                         $validator->errors()->toJson(), 400,
