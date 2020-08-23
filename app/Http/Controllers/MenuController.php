@@ -122,6 +122,7 @@ class MenuController extends Controller
     
     public function getAllMenu(){
         $menu = DB::table('menu')
+            ->join('menu_categories', 'menu_categories.menuId', '=', 'menu.id')
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
