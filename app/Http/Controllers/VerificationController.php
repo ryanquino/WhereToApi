@@ -99,6 +99,7 @@ class VerificationController extends Controller
         $verification = new Verification;
         $verification->imagePath = $imagePath;
         $verification->isVerified = 0;
+        $verification->isSuspended = 0;
 
         $user = User::find($userId);
         $user->verification()->save($verification);
