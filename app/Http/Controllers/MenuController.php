@@ -92,7 +92,7 @@ class MenuController extends Controller
             ->join('menu_categories', 'menu.id', '=', 'menu_categories.menuId')
             ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select('menu.id', 'restaurants.id','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
+            ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
             ->where('categoryId' , '=', $id)
             ->get();
 
