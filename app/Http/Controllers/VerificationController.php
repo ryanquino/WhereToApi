@@ -113,7 +113,7 @@ class VerificationController extends Controller
 
     }
 
-    public function updateVerification(){
+    public function updateVerification(Request $request){
         $userId = $request->json()->get('userId');
         $imagePath = $request->json()->get('imagePath');
 
