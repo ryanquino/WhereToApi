@@ -105,6 +105,12 @@ class VerificationController extends Controller
 
     }
 
+    public function checkVerification(){
+        $verify = Verification::where('imagePath', NULL)->pluck('userId');
+
+        return response()->json($verify);
+    }
+
     public function getUserVerification($id){
         $verification = Verification::where('userId', $id)
             ->first();
