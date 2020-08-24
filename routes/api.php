@@ -47,7 +47,7 @@ Route::post('riderRemit', 'RemitController@riderRemit');
 Route::post('addRider', 'UserController@addRider');
 Route::post('addRestaurant', 'RestaurantController@store');
 Route::post('addMenu', 'MenuController@addMenu');
-Route::post('submitVerification', 'VerificationController@submitVerification');
+Route::post('submitVerification/{id}', 'VerificationController@submitVerification');
 Route::post('verifyUser/{id}', 'VerificationController@verifyUser');
 Route::post('suspendAccount/{id}', 'VerificationController@suspendAccount');
 Route::get('isAccountSuspended/{id}', 'VerificationController@isAccountSuspended');
@@ -55,7 +55,8 @@ Route::post('approveRemittance/{id}', 'RemitController@approveRemittance');
 Route::get('getUnverifiedList', 'VerificationController@getUnverifiedList');
 Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerification');
 Route::get('viewRiderRemittance', 'RemitController@viewRiderRemittance');
-
+Route::post('getUserVerification/{id}', 'VerificationController@getUserVerification');
+Route::post('updateVerification', 'VerificationController@updateVerification');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

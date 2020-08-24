@@ -92,18 +92,34 @@ class VerificationController extends Controller
         else response()->json(false);
     }
 
-    public function submitVerification(Request $request){
-        $userId = $request->json()->get('userId');
-        $imagePath = $request->json()->get('imagePath');
+    public function submitVerification($id){
+        // $userId = $request->json()->get('userId');
+        // $imagePath = $request->json()->get('imagePath');
 
         $verification = new Verification;
-        $verification->imagePath = $imagePath;
         $verification->isVerified = 0;
         $verification->isSuspended = 0;
 
-        $user = User::find($userId);
+        $user = User::find($id);
         $user->verification()->save($verification);
 
+    }
+
+    public function getUserVerification($id){
+        $verification = Verification::where('userId', $id)
+            ->first();
+        
+        return response()->json($verification);
+
+    }
+
+    public function updateVerification(){
+        $userId = $request->json()->get('userId');
+        $imagePath = $request->json()->get('imagePath');
+
+        $verification = Verification::where('userId', $id)
+            ->where('imagePath', NULL)
+            ->update(['imagePath' => $imagePath]);
     }
 
     public function viewUserVerification($id){

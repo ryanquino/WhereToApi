@@ -63,6 +63,9 @@ class RestaurantController extends Controller
 
         $restaurantId = $resto->id;
 
+        $restautantDetails = DB::table('restaurant_details')
+            ->insert(['restaurantId' => $restaurantId, 'owner' => $request->json()->get('owner'), 'representative' => $request->json()->get('representative')]);
+
         return response()->json($restaurantId);
     }
 
