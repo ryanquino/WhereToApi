@@ -89,8 +89,7 @@ class MenuController extends Controller
 
     public function getMenuCategory($id){
         $menu = DB::table('menu')
-            ->join('menu_categories', 'menu.id', '=', 'menu_categories.menuId')
-            ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
+            ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
             ->where('categoryId' , '=', $id)
@@ -102,28 +101,22 @@ class MenuController extends Controller
         $restoId = $request->json()->get('restaurantId');
         $menu = $request->json()->get('menu');
         for ($i=0; $i < count($menu); $i++) { 
-            $category = $menu[$i]['category'];
             $addMenu = new Menu;
             $addMenu->restaurant_id = $restoId;
             $addMenu->menuName = $menu[$i]['menuName'];
             $addMenu->description = $menu[$i]['description'];
             $addMenu->price = $menu[$i]['price'];
             $addMenu->imagePath = $menu[$i]['imagePath'];
+            $addMenu->categoryId = $menu[$i]['categoryId'];
             $addMenu->save();
             // $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
-            for ($j=0; $j <count($category) ; $j++) { 
-                # code...
-                $addCategory = DB::table('menu_categories')
-                    ->insert(['menuId' => $addMenu->id, 'categoryId' => $category[$j]['id']]);   
-            }
 
         }
     }
     
     public function getAllMenu(){
         $menu = DB::table('menu')
-            ->join('menu_categories', 'menu_categories.menuId', '=', 'menu.id')
-            ->join('categories', 'categories.id', '=', 'menu_categories.categoryId')
+            ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
             ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'categories.categoryName', 'menu.imagePath')
