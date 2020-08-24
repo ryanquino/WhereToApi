@@ -117,7 +117,7 @@ class VerificationController extends Controller
         $userId = $request->json()->get('userId');
         $imagePath = $request->json()->get('imagePath');
 
-        $verification = Verification::where('userId', $id)
+        $verification = Verification::where('userId', $userId)
             ->where('imagePath', NULL)
             ->update(['imagePath' => $imagePath]);
     }
