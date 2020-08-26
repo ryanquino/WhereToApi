@@ -110,9 +110,15 @@ class RemitController extends Controller
 
         return response()->json($remittance);
     }
+    public function viewRemittedList(){
+        $list = Remittance::whereNotNull('imagePath')->get();
 
+        return response()->json($list);
+    }
     public function viewUnremittedList(){
-        $list = Remittance::where('status' , 0)->get();
+        $list = Remittance::where('imagePath' , NULL)->get();
+
+        return response()->json($list);
     }
     public function approveRemittance($id){
         $remit = Remittance::where('id', $id)

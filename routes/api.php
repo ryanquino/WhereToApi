@@ -60,6 +60,8 @@ Route::get('viewUnremittedList', 'RemitController@viewUnremittedList');
 Route::post(' ification/{id}', 'VerificationController@getUserVerification');
 Route::post('updateVerification', 'VerificationController@updateVerification');
 Route::get('checkVerification', 'VerificationController@checkVerification');
+Route::get('unSuspendRider/{id}', 'VerificationController@unSuspendRider');
+Route::get('suspendRider/{id}', 'VerificationController@suspendRider');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

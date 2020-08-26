@@ -285,9 +285,14 @@ class UserController extends Controller
         }
         else if($isSuspended[0]->isSuspended == 1){
             return response()->json(true);
-        }
-        
+        }   
     }
 
+    public function suspendRider($id){
+        $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 1]);
+    }
 
+    public function unSuspendRider($id){
+        $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
+    }
 }
