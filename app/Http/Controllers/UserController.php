@@ -80,17 +80,20 @@ class UserController extends Controller
                     $this->addRemittanceRecord($user['id']);
                 }
             }
+            else{
+                return response()->json([
+                    'success'=> true,
+                    'user'=> $user,
+                    'userType'=>$user['userType'],
+                    'password'=>JWTAuth::user()->password,
+                    'token' =>$token
+                ]);
+            }
             
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        return response()->json([
-            'success'=> true,
-            'user'=> $user,
-            'userType'=>$user['userType'],
-            'password'=>JWTAuth::user()->password,
-            'token' =>$token
-        ]);
+        
     }
 
 
