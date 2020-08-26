@@ -73,18 +73,23 @@ class UserController extends Controller
 
                 if($this->checkRiderIfSuspended($user['id'])){              
                     return response()->json([
-                        'suspended'=>true,
-                        'message'=>'Logout Success']);
+                        'suspended'=>true]);
                 }
                 else{
-                    $this->addRemittanceRecord($user['id']);
+                    if($this->checkRiderRemittance($user['id'])){
+                        return response()->json('remitPending'=>true);
+                    }
+                    else{
+                        $this->addRemittanceRecord($user['id']);
 
-                    return response()->json([
-                        'success'=> true,
-                        'user'=> $user,
-                        'userType'=>$user['userType'],
-                        'token' =>$token
-                    ]);
+                        return response()->json([
+                            'success'=> true,
+                            'user'=> $user,
+                            'userType'=>$user['userType'],
+                            'token' =>$token
+                        ]);
+                    }
+                    
                 }
             }
             else{
@@ -154,7 +159,7 @@ class UserController extends Controller
         }       
     }
 
-    
+
     public function goOffline($id){
         $user = User::find($id);
         $user->status = 0;
@@ -165,7 +170,15 @@ class UserController extends Controller
         else return response()->json(false);
     }
 
-
+    public function checkRiderRemittance($id){
+        $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
+        if(empty($remitStatus[0]->imagePath)){
+            return true;
+        }
+        else{
+            return false;
+        }        
+    }
     public function getAuthenticatedUser()
     {
         try {
