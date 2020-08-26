@@ -86,6 +86,13 @@ class RemitController extends Controller
     public function riderRemit(Request $request){
         $riderId = $request->json()->get('riderId');
         $imagePath = $request->json()->get('imagePath');
+        // $total = DB::table('transactions')
+        //     ->join('menu', 'menu.id', '=', 'food_orders.menuId')
+        //     ->join('food_orders', 'transactions.id', '=', 'food_orders.transactionId')
+        //     ->select(DB::raw('SUM(menu.price*food.orders.quantity) as amount + transactions.deliveryCharge'))
+        //     ->where('riderId', $riderId)
+        //     ->whereDate('created_at', date("Y-m-d"))
+        //     ->get();
         $remit = new Remittance;
         $remit->riderId = $riderId;
         $remit->imagePath = $imagePath;
@@ -104,8 +111,11 @@ class RemitController extends Controller
         return response()->json($remittance);
     }
 
+    public function viewUnremittedList(){
+        $list = Remittance::where('status' , 0)->get();
+    }
     public function approveRemittance($id){
-        $remit = Remittance::where('riderId', $id)
+        $remit = Remittance::where('id', $id)
           ->update(['status' => 1]);
     }
 }

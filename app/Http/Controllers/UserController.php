@@ -276,7 +276,16 @@ class UserController extends Controller
           ->update(['password' => Hash::make($request->json()->get('password'))]);
     }
 
-
+    public function checkRiderIfSuspended($id){
+        $isSuspended = DB::table('rider_details')->select('isSuspended')->where('riderId', $id)->get();
+        if($isSuspended == 0){
+            return response()->json(false);
+        }
+        else if($isSuspended == 1){
+            return response()->json(true);
+        }
+        
+    }
 
 
 }

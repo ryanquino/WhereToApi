@@ -43,6 +43,7 @@ Route::post('updateOrder', 'OrderController@updateOrder');
 Route::post('addRiderComment', 'UserController@commentRider');
 Route::post('rateRider', 'UserController@rateRider');
 Route::post('riderRemit', 'RemitController@riderRemit');
+Route::get('checkRiderIfSuspended/{id}', 'UserController@checkRiderIfSuspended');
 //admin side
 Route::post('addRider', 'UserController@addRider');
 Route::post('addRestaurant', 'RestaurantController@store');
@@ -55,7 +56,8 @@ Route::post('approveRemittance/{id}', 'RemitController@approveRemittance');
 Route::get('getUnverifiedList', 'VerificationController@getUnverifiedList');
 Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerification');
 Route::get('viewRiderRemittance', 'RemitController@viewRiderRemittance');
-Route::post('getUserVerification/{id}', 'VerificationController@getUserVerification');
+Route::get('viewUnremittedList', 'RemitController@viewUnremittedList');
+Route::post(' ification/{id}', 'VerificationController@getUserVerification');
 Route::post('updateVerification', 'VerificationController@updateVerification');
 Route::get('checkVerification', 'VerificationController@checkVerification');
 
