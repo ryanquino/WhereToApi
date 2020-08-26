@@ -78,6 +78,13 @@ class UserController extends Controller
                 }
                 else{
                     $this->addRemittanceRecord($user['id']);
+
+                    return response()->json([
+                        'success'=> true,
+                        'user'=> $user,
+                        'userType'=>$user['userType'],
+                        'token' =>$token
+                    ]);
                 }
             }
             else{
