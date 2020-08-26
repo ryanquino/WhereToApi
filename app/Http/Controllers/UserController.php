@@ -279,8 +279,8 @@ class UserController extends Controller
     public function checkRiderIfSuspended($id){
         $isSuspended = DB::table('rider_details')->select('isSuspended')->where('riderId', $id)->get();
         
-        return response()->json($isSuspended);
-        if($isSuspended == 0){
+
+        if($isSuspended[0]['isSuspended'] == 0){
             return response()->json(false);
         }
         else if($isSuspended == 1){
