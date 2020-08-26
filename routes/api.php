@@ -45,6 +45,7 @@ Route::post('rateRider', 'UserController@rateRider');
 Route::post('riderRemit', 'RemitController@riderRemit');
 Route::post('addRemittanceRecord/{id}', 'RemitController@addRemittanceRecord');
 Route::get('checkRiderIfSuspended/{id}', 'UserController@checkRiderIfSuspended');
+Route::post('changePassword', 'UserController@changePassword');
 //admin side
 Route::post('addRider', 'UserController@addRider');
 Route::post('addRestaurant', 'RestaurantController@store');
