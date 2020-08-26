@@ -82,7 +82,16 @@ class RemitController extends Controller
     {
         //
     }
+    public function addRemittanceRecord($id){
+        $riderId = $request->json()->get('riderId');
+        $remit = new Remittance;
+        $remit->riderId = $riderId;
+        $remit->amount = 0;
+        $remit->imagePath = NULL;
+        $remit->status = 0;
 
+        $remit->save();
+    }
     public function riderRemit(Request $request){
         $riderId = $request->json()->get('riderId');
         $imagePath = $request->json()->get('imagePath');
