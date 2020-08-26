@@ -128,8 +128,7 @@ class RemitController extends Controller
     }
     public function checkRiderRemittance($id){
         $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
-        return response()->json($remitStatus[0]->imagePath);
-        if($remitStatus[0]->imagePath == NULL){
+        if(emptY($remitStatus[0]->imagePath)){
             return response()->json(true);
         }
         else{
