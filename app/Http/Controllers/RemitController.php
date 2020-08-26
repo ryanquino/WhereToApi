@@ -127,7 +127,7 @@ class RemitController extends Controller
         $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
     }
     public function checkRiderRemittance($id){
-        $remitStatus = Remittance::where('riderId', $id)->pluck('imagePath');
+        $remitStatus = DB::select('SELECT riderId, created_at from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
 
         return response()->json($remitStatus);
     }
