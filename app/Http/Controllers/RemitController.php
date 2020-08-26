@@ -117,7 +117,10 @@ class RemitController extends Controller
         return response()->json($list);
     }
     public function viewUnremittedList(){
-        $list = Remittance::where('imagePath' , NULL)->get();
+        $list = DB::table('remittance')
+            ->join('users', 'users.id', '=', 'remittance.riderId')
+            ->select('remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
+            ->where('imagePath' , NULL)->get();
 
         return response()->json($list);
     }
