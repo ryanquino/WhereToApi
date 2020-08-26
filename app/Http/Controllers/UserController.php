@@ -70,17 +70,19 @@ class UserController extends Controller
             $user = JWTAuth::user();
             if($user['userType'] == 1){
                 $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
-            }
-            if($this->checkRiderIfSuspended($user['id'])){
+
+                if($this->checkRiderIfSuspended($user['id'])){
                 JWTAuth::invalidate(JWTAuth::getToken());
            
                 return response()->json([
                     'success'=>true,
                     'message'=>'Logout Success']);
                 }
-            else{
-                $this->addRemittanceRecord($user['id']);
+                else{
+                    $this->addRemittanceRecord($user['id']);
+                }
             }
+            
         // } catch (JWTException $e) {
         //     return response()->json(['error' => 'could_not_create_token'], 500);
         // }
