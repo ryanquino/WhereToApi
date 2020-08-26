@@ -77,8 +77,6 @@ class UserController extends Controller
                         'message'=>'Logout Success']);
                 }
                 else{
-                    $x = DB::table('remittance')->where('riderId', $user['id'])->whereDate('created_at',date('Y-m-d'))->select('riderId', 'created_at')->get();
-                    return response()->json($x);
                     $this->addRemittanceRecord($user['id']);
 
                     return response()->json([
@@ -143,9 +141,12 @@ class UserController extends Controller
     }
 
     public function addRemittanceRecord($id){
-        $ifExists = DB::table('remittance')->where('riderId', $id)->where('created_at',date('Y-m-d'))->doesntExist();
+        $ifExists = DB::select('SELECT riderId, created_at from remittance where riderId = ? and date(created_at) = ?', [$id, date('Y-m-d')]);
+        $data = json_decode($ifExists, true);
 
-        if(!$ifExists){
+        return response()->json(empty($data));
+
+        if($ifExists){
             $remit = new Remittance;
             $remit->riderId = $id;
             $remit->amount = 0;
