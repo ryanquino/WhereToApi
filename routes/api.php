@@ -43,7 +43,6 @@ Route::post('updateOrder', 'OrderController@updateOrder');
 Route::post('addRiderComment', 'UserController@commentRider');
 Route::post('rateRider', 'UserController@rateRider');
 Route::post('riderRemit', 'RemitController@riderRemit');
-Route::post('riderRemit', 'RemitController@riderRemit');
 Route::get('addRemittanceRecord/{id}', 'RemitController@addRemittanceRecord');
 //admin side
 Route::post('addRider', 'UserController@addRider');
