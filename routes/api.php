@@ -43,7 +43,7 @@ Route::post('updateOrder', 'OrderController@updateOrder');
 Route::post('addRiderComment', 'UserController@commentRider');
 Route::post('rateRider', 'UserController@rateRider');
 Route::post('riderRemit', 'RemitController@riderRemit');
-Route::post('addRemittanceRecord/{id}', 'RemitController@addRemittanceRecord');
+Route::post('addRemittanceRecord/{id}', 'UserController@addRemittanceRecord');
 Route::get('checkRiderIfSuspended/{id}', 'UserController@checkRiderIfSuspended');
 Route::post('changePassword', 'UserController@changePassword');
 //admin side

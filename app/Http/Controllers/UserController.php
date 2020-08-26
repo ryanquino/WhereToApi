@@ -71,6 +71,12 @@ class UserController extends Controller
             if($user['userType'] == 1){
                 $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
             }
+            if(checkRiderIfSuspended($user['id'])){
+                logout();
+            }
+            else{
+                addRemittanceRecord($user['id']);
+            }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
@@ -120,6 +126,15 @@ class UserController extends Controller
         return $user;
     }
 
+    public function addRemittanceRecord($id){
+        $remit = new Remittance;
+        $remit->riderId = $id;
+        $remit->amount = 0;
+        $remit->imagePath = NULL;
+        $remit->status = 0;
+
+        $remit->save();
+    }
     public function goOffline($id){
         $user = User::find($id);
         $user->status = 0;
