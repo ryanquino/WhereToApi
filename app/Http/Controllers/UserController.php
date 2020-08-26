@@ -19,7 +19,7 @@ use Tymon\JWTAuth\JWTManager as JWT;
 class UserController extends Controller
 {
     //
-        public function register(Request $request)
+    public function register(Request $request)
     {
             $validator = Validator::make($request->json()->all() , [
                 'name' => 'required|string|max:255',
@@ -72,12 +72,11 @@ class UserController extends Controller
                 $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
 
                 if($this->checkRiderIfSuspended($user['id'])){              
-                    return response()->json([
-                        'suspended'=>true]);
+                    return response()->json(['suspended'=>true]);
                 }
                 else{
                     if($this->checkRiderRemittance($user['id'])){
-                        return response()->json('remitPending'=>true);
+                        return response()->json(['remitPending'=>true]);
                     }
                     else{
                         $this->addRemittanceRecord($user['id']);
