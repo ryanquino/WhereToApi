@@ -129,6 +129,6 @@ class RemitController extends Controller
     public function checkRiderRemittance($id){
         $remitStatus = Remittance::where('rider', $id)->pluck('imagePath');
 
-        return response()json($remitStatus);
+        return response()->json($remitStatus);
     }
 }
