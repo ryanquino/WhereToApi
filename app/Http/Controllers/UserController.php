@@ -71,11 +71,11 @@ class UserController extends Controller
             if($user['userType'] == 1){
                 $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
             }
-            if(checkRiderIfSuspended($user['id'])){
+            if($this->checkRiderIfSuspended($user['id'])){
                 logout();
             }
             else{
-                addRemittanceRecord($user['id']);
+                $this->addRemittanceRecord($user['id']);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
