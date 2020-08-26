@@ -108,7 +108,11 @@ class RemitController extends Controller
         return response()->json($remittance);
     }
     public function viewRemittedList(){
-        $list = Remittance::whereNotNull('imagePath')->get();
+        $list = DB::table('remittance')
+            ->join('users', 'users.id', '=', 'remittance.riderId')
+            ->select('remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
+            ->whereNotNull('imagePath')->get();
+
 
         return response()->json($list);
     }
