@@ -58,7 +58,7 @@ Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerifica
 Route::get('viewRiderRemittance', 'RemitController@viewRiderRemittance');
 Route::get('viewUnremittedList', 'RemitController@viewUnremittedList');
 Route::get('viewRemittedList', 'RemitController@viewRemittedList');
-Route::post(' ification/{id}', 'VerificationController@getUserVerification');
+Route::post(' getUserVerification/{id}', 'VerificationController@getUserVerification');
 Route::post('updateVerification', 'VerificationController@updateVerification');
 Route::get('checkVerification', 'VerificationController@checkVerification');
 Route::get('unSuspendRider/{id}', 'VerificationController@unSuspendRider');
