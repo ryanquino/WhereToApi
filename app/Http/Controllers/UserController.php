@@ -77,22 +77,15 @@ class UserController extends Controller
                         'message'=>'Logout Success']);
                 }
                 else{
-                    if($this->checkRiderRemittance($user['id'])){
-                        return response()->json([
-                        'pendingRemittance'=>true]);
-                    }
-                    else{
-                        $this->addRemittanceRecord($user['id']);
+                    $this->addRemittanceRecord($user['id']);
 
-                        return response()->json([
-                            'success'=> true,
-                            'user'=> $user,
-                            'userType'=>$user['userType'],
-                            'token' =>$token
-                        ]);
-                    }
+                    return response()->json([
+                        'success'=> true,
+                        'user'=> $user,
+                        'userType'=>$user['userType'],
+                        'token' =>$token
+                    ]);
                 }
-                    
             }
             else{
                 return response()->json([
@@ -161,17 +154,7 @@ class UserController extends Controller
         }       
     }
 
-    public function checkRiderRemittance($id){
-        $remitStatus = DB::select('SELECT riderId, created_at from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
-        if(!empty($remitStatus)){
-            return response()->json(false);
-        }
-        else{
-            return response()->json(true);
-        }
-        
-    }
-
+    
     public function goOffline($id){
         $user = User::find($id);
         $user->status = 0;
