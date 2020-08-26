@@ -296,10 +296,10 @@ class UserController extends Controller
         
 
         if($isSuspended[0]->isSuspended == 0){
-            return response()->json(false);
+            return false;
         }
         else if($isSuspended[0]->isSuspended == 1){
-            return response()->json(true);
+            return true;
         }   
     }
 
