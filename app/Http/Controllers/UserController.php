@@ -127,13 +127,16 @@ class UserController extends Controller
     }
 
     public function addRemittanceRecord($id){
-        $remit = new Remittance;
-        $remit->riderId = $id;
-        $remit->amount = 0;
-        $remit->imagePath = NULL;
-        $remit->status = 0;
+        $ifExists = Remittance::where(['riderId' => $id, 'created_at' => date('Y-m-d')])->exists();
+        if(!$ifExists){
+            $remit = new Remittance;
+            $remit->riderId = $id;
+            $remit->amount = 0;
+            $remit->imagePath = NULL;
+            $remit->status = 0;
 
-        $remit->save();
+            $remit->save();
+        }       
     }
     public function goOffline($id){
         $user = User::find($id);
