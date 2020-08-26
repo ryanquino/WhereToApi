@@ -77,7 +77,7 @@ class UserController extends Controller
                         'message'=>'Logout Success']);
                 }
                 else{
-                    $x = DB::table('remittance')->where('riderId', $user['id'])->where('date(created_at)',date('Y-m-d'))->select('riderId', 'created_at')->get();
+                    $x = DB::table('remittance')->where('riderId', $user['id'])->whereDate('created_at',date('Y-m-d'))->select('riderId', 'created_at')->get();
                     return response()->json($x);
                     $this->addRemittanceRecord($user['id']);
 
