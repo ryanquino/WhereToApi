@@ -141,9 +141,9 @@ class UserController extends Controller
     }
 
     public function addRemittanceRecord($id){
-        $ifExists = Remittance::where(['riderId' => $id, 'created_at' => date('Y-m-d')])->first();
+        $ifExists = DB::table('remittance')->where('riderId', $id)->where('created_at',date('Y-m-d'))->exists();
 
-        if($ifExists === null){
+        if(!$ifExists){
             $remit = new Remittance;
             $remit->riderId = $id;
             $remit->amount = 0;
