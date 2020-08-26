@@ -280,7 +280,7 @@ class UserController extends Controller
         $isSuspended = DB::table('rider_details')->select('isSuspended')->where('riderId', $id)->get();
         
 
-        if($isSuspended[0]['isSuspended'] == 0){
+        if($isSuspended[0]->isSuspended == 0){
             return response()->json(false);
         }
         else if($isSuspended == 1){
