@@ -128,7 +128,12 @@ class RemitController extends Controller
     }
     public function checkRiderRemittance($id){
         $remitStatus = DB::select('SELECT riderId, created_at from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
-
-        return response()->json($remitStatus);
+        if(!empty($remitStatus)){
+            return response()->json(false);
+        }
+        else{
+            return response()->json(true);
+        }
+        
     }
 }
