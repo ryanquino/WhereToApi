@@ -72,7 +72,7 @@ class UserController extends Controller
                 $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
             }
             if($this->checkRiderIfSuspended($user['id'])){
-                return response()->json($this->checkRiderIfSuspended($user['id']));
+                $this->logout($request);
             }
             else{
                 $this->addRemittanceRecord($user['id']);
@@ -90,7 +90,7 @@ class UserController extends Controller
     }
 
 
-    public function logout()
+    public function logout(Request $request)
     {
            
         try {
