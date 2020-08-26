@@ -71,12 +71,10 @@ class UserController extends Controller
             if($user['userType'] == 1){
                 $goOnline = DB::table('users')->where('id', $user['id'])->update(['status'=> 1]);
 
-                if($this->checkRiderIfSuspended($user['id'])){
-                JWTAuth::invalidate(JWTAuth::getToken());
-           
-                return response()->json([
-                    'success'=>true,
-                    'message'=>'Logout Success']);
+                if($this->checkRiderIfSuspended($user['id'])){              
+                    return response()->json([
+                        'suspended'=>true,
+                        'message'=>'Logout Success']);
                 }
                 else{
                     $this->addRemittanceRecord($user['id']);
