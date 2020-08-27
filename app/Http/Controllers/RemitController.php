@@ -131,6 +131,6 @@ class RemitController extends Controller
         $rider = Remittance::find($id);
 
         $riderId = $rider->riderId;
-        $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
+        $suspend = DB::table('rider_details')->where('riderId', $riderId)->update(['isSuspended'=> 0]);
     }
 }
