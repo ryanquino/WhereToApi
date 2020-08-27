@@ -44,6 +44,7 @@ class UserController extends Controller
                 'status' => 1,
                 'userType' => 0,
                 'barangayId' => $request->json()->get('barangayId'),
+                'imagePath' => $request->json()->get('imagePath'),
             ]);
 
         $token = JWTAuth::fromUser($user);
