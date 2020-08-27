@@ -209,6 +209,8 @@ class OrderController extends Controller
     public function cancelOrder($id){
         $order = DB::table('transactions')->where('id', $id)->delete();
         $order = DB::table('food_orders')->where('transactionId', $id)->delete();
+
+        return response()->json($order);
     }
     public function transactionComplete($id){
         $order = Order::find($id);
