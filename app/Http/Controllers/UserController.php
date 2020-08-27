@@ -308,7 +308,7 @@ class UserController extends Controller
         return response()->json($rider);  
     }
 
-    public function changePassword(){
+    public function changePassword(Request $request){
         $validator = Validator::make($request->json()->all() , [
                 'password' => 'required|string|min:6', 
             ]);

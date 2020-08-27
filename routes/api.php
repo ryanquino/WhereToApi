@@ -66,8 +66,8 @@ Route::get('getRiderRemit/{id}', 'RemitController@getRiderRemit');
 Route::post('getUserVerification/{id}', 'VerificationController@getUserVerification');
 Route::post('updateVerification', 'VerificationController@updateVerification');
 Route::get('checkVerification', 'VerificationController@checkVerification');
-Route::get('unSuspendRider/{id}', 'VerificationController@unSuspendRider');
-Route::get('suspendRider/{id}', 'VerificationController@suspendRider');
+Route::get('unSuspendRider/{id}', 'UserController@unSuspendRider');
+Route::get('suspendRider/{id}', 'UserController@suspendRider');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
