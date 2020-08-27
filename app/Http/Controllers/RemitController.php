@@ -111,6 +111,7 @@ class RemitController extends Controller
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
+            ->where('status', 0)
             ->whereNotNull('imagePath')->get();
 
 
