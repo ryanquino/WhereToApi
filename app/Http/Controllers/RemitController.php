@@ -112,7 +112,7 @@ class RemitController extends Controller
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
             ->where('remittance.status', 0)
-            ->whereNotNull('imagePath')->get();
+            ->whereNotNull('remittance.imagePath')->get();
 
 
         return response()->json($list);
@@ -121,7 +121,7 @@ class RemitController extends Controller
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
-            ->where('imagePath' , NULL)->get();
+            ->where('remittance.imagePath' , NULL)->get();
 
         return response()->json($list);
     }
