@@ -92,7 +92,7 @@ class RemitController extends Controller
         $remit->save();
     }
     public function getRiderRemit($id){
-        $remit = Remittance::where('riderId', $id)->where('imagePath', NULL)->first();
+        $remit = Remittance::where('riderId', $id)->first();
         
         return response()->json($remit);
 
