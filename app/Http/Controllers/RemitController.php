@@ -101,7 +101,7 @@ class RemitController extends Controller
     public function viewRiderRemittance(){
         $remittance = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
-            ->select('remittance.riderId', 'users.name', 'remittance.imagePath')
+            ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.imagePath')
             ->where('remittance.status', 0)
             ->get();
 
@@ -110,7 +110,7 @@ class RemitController extends Controller
     public function viewRemittedList(){
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
-            ->select('remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
+            ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
             ->whereNotNull('imagePath')->get();
 
 
@@ -119,7 +119,7 @@ class RemitController extends Controller
     public function viewUnremittedList(){
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
-            ->select('remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
+            ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
             ->where('imagePath' , NULL)->get();
 
         return response()->json($list);
@@ -128,6 +128,9 @@ class RemitController extends Controller
         $remit = Remittance::where('id', $id)
           ->update(['status' => 1]);
 
+        $rider = Remittance::find($id);
+
+        $riderId = $rider->riderId;
         $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
     }
 }
