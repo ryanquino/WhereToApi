@@ -161,4 +161,10 @@ class MenuController extends Controller
 
          return response()->json($menuList);   
     }
+
+    public function getMenuById($id){
+        $menu = Menu::find($id);
+
+        return response()->json($menu);
+    }
 }
