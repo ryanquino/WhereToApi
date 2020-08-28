@@ -68,7 +68,11 @@ class RestaurantController extends Controller
 
         return response()->json($restaurantId);
     }
-
+    public function makeRestaurantFeatured($id){
+        $resto = Restaurant::find($id);
+        $resto->isFeatured = 1;
+        $resto->save();
+    }
     public function updateRestaurant(){
         $resto = Restaurant::find($request->json()->get('restaurantId'));
         $resto->restaurantName = $request->json()->get('restaurantName');

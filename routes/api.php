@@ -71,6 +71,7 @@ Route::post('suspendRider/{id}', 'UserController@suspendRider');
 Route::post('updateMenu', 'MenuController@updateMenu');
 Route::post('updateRestaurant', 'MenuController@updateRestaurant');
 Route::post('makeMenuFeatured/{id}', 'MenuController@makeMenuFeatured');
+Route::post('makeRestaurantFeatured/{id}', 'RestaurantController@makeRestaurantFeatured');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
