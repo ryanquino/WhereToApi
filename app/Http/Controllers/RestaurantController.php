@@ -69,6 +69,21 @@ class RestaurantController extends Controller
         return response()->json($restaurantId);
     }
 
+    public function updateRestaurant(){
+        $resto = Restaurant::find($request->json()->get('restaurantId'));
+        $resto->restaurantName = $request->json()->get('restaurantName');
+        $resto->address = $request->json()->get('address');
+        $resto->barangayId = $request->json()->get('barangayId');
+        $resto->contactNumber = $request->json()->get('contactNumber');
+        $resto->openTime = $request->json()->get('openTime');
+        $resto->closingTime = $request->json()->get('closingTime');
+        $resto->closeOn = $request->json()->get('closeOn');
+        $resto->isFeatured = $request->json()->get('isFeatured');
+        $resto->imagePath = $request->json()->get('imagePath');
+        $resto->status = 1;
+        $resto->save();
+    }
+
     /**
      * Display the specified resource.
      *

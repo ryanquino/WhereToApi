@@ -68,6 +68,8 @@ Route::post('updateVerification', 'VerificationController@updateVerification');
 Route::get('checkVerification', 'VerificationController@checkVerification');
 Route::post('unSuspendRider/{id}', 'UserController@unSuspendRider');
 Route::post('suspendRider/{id}', 'UserController@suspendRider');
+Route::post('updateMenu', 'MenuController@updateMenu');
+Route::post('updateRestaurant', 'MenuController@updateRestaurant');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

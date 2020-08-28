@@ -113,6 +113,27 @@ class MenuController extends Controller
 
         }
     }
+
+    public function updateMenu(){
+        $menuId = $request->json()->get('menuId');
+        $restaurantId = $request->json()->get('restaurantId');
+        $menuName = $request->json()->get('menuName');
+        $description = $request->json()->get('description');
+        $price = $request->json()->get('price');
+        $imagePath = $request->json()->get('imagePath');
+        $categoryId = $request->json()->get('categoryId');
+
+        $menu = Menu::find($menuId);
+        $menu->restaurant_id = $restaurantId;
+        $menu->menuName = $menuName;
+        $menu->description = $description;
+        $menu->price = $price;
+        $menu->imagePath = $imagePath;
+        $menu->categoryId = $categoryId;
+        $menu->isFeatured = 0;
+        $menu->save();
+
+    }
     
     public function getAllMenu(){
         $menu = DB::table('menu')
