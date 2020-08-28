@@ -108,10 +108,17 @@ class MenuController extends Controller
             $addMenu->price = $menu[$i]['price'];
             $addMenu->imagePath = $menu[$i]['imagePath'];
             $addMenu->categoryId = $menu[$i]['categoryId'];
+            $addMenu->isFeatured = 0;
             $addMenu->save();
             // $addMenu = DB::table('menu')->insert(['restaurant_id' => $restoId, 'menuName' => $menu[$i]['menuName'], 'description' => $menu[$i]['description'],'price' => $menu[$i]['price']]);
 
         }
+    }
+
+    public function makeMenuFeatured($id){
+        $menu = Menu::find($id);
+        $menu->isFeatured = 1;
+        $menu->save();
     }
 
     public function updateMenu(){
@@ -140,7 +147,7 @@ class MenuController extends Controller
             ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'menu.categoryId','categories.categoryName', 'menu.imagePath')
+            ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'menu.categoryId', 'menu.isFeatured','categories.categoryName', 'menu.imagePath')
             ->get();
             
         return response()->json($menu);
@@ -149,7 +156,7 @@ class MenuController extends Controller
     public function getMenuPerRestaurant($id){
         $menuList = DB::table('menu')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')          
-            ->select('menu.id', 'menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
+            ->select('menu.id', 'menu.menuName','menu.description', 'menu.price', 'menu.imagePath', 'menu.isFeatured')
             ->where('restaurants.id', '=', $id)->get();
 
          return response()->json($menuList);   
