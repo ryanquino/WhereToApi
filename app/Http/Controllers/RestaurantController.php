@@ -151,7 +151,7 @@ class RestaurantController extends Controller
 
     }
 
-    public function getRestaurtById($id){
+    public function getRestaurantById($id){
         $resto = Restaurant::find($id);
 
         return response()->json($resto);
