@@ -149,17 +149,9 @@ class RestaurantController extends Controller
             ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber', 'restaurants.imagePath')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
             ->where('isFeatured', '=', 1)
-            ->where('restaurants.isActive', 1)->get();
+            ->where('restaurants.isActive','=', 1)->get();
 
         return response()->json($featuredResto);
-    }
-
-    public function getRestaurantMenu($id){
-
-        $menu = Restaurant::find($id)->menu->where('restaurants.isActive', 1)->get();;
-
-        return response()->json($menu);
-
     }
 
     public function getRestaurantById($id){
