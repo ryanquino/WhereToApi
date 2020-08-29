@@ -93,6 +93,7 @@ class MenuController extends Controller
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','menu.menuName','menu.description', 'menu.price', 'menu.imagePath')
             ->where('categoryId' , '=', $id)
+            ->where('menu.isActive', 1)
             ->get();
 
         return response()->json($menu);
@@ -148,6 +149,7 @@ class MenuController extends Controller
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
             ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'menu.categoryId', 'menu.isFeatured','categories.categoryName', 'menu.imagePath')
+            ->where('menu.isActive', 1)
             ->get();
             
         return response()->json($menu);
@@ -157,13 +159,14 @@ class MenuController extends Controller
         $menuList = DB::table('menu')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')          
             ->select('menu.id', 'menu.menuName','menu.description', 'menu.price', 'menu.imagePath', 'menu.isFeatured')
-            ->where('restaurants.id', '=', $id)->get();
+            ->where('restaurants.id', '=', $id)
+            ->where('menu.isActive', 1)->get();
 
          return response()->json($menuList);   
     }
 
     public function getMenuById($id){
-        $menu = Menu::find($id);
+        $menu = Menu::find($id)->where('isActive', 1);
 
         return response()->json($menu);
     }

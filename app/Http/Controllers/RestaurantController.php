@@ -91,8 +91,8 @@ class RestaurantController extends Controller
     }
 
     public function deleteRestaurant($id){
-        $deleteResto = DB::table('restaurants')->where('id', $id)->delete();
-        $deleteMenu = DB::table('menu')->where('restaurant_id', $id)->delete();
+        $deleteResto = DB::table('restaurants')->update(['isActive' => 0])->where('id', $id)->delete();
+        $deleteMenu = DB::table('menu')>update(['isActive' => 0])->where('restaurant_id', $id)->delete();
     }
 
     /**
@@ -145,21 +145,22 @@ class RestaurantController extends Controller
         $featuredResto = DB::table('restaurants')
             ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber', 'restaurants.imagePath')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->where('isFeatured', '=', 1)->get();
+            ->where('isFeatured', '=', 1)
+            ->where('restaurants.isActive', 1)->get();
 
         return response()->json($featuredResto);
     }
 
     public function getRestaurantMenu($id){
 
-        $menu = Restaurant::find($id)->menu;
+        $menu = Restaurant::find($id)->menu->where('restaurants.isActive', 1)->get();;
 
         return response()->json($menu);
 
     }
 
     public function getRestaurantById($id){
-        $resto = Restaurant::find($id);
+        $resto = Restaurant::find($id)->where('restaurants.isActive', 1);
 
         return response()->json($resto);
     }
