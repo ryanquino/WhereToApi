@@ -166,7 +166,7 @@ class MenuController extends Controller
     }
 
     public function getMenuById($id){
-        $menu = Menu::find($id)->where('isActive', 1);
+        $menu = Menu::find($id)->where('isActive', 1)->first();
 
         return response()->json($menu);
     }
