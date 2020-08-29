@@ -96,7 +96,7 @@ class RestaurantController extends Controller
     public function deleteRestaurant($id){
         $deleteResto = DB::table('restaurants')->update(['isActive' => 0])->where('id', $id);
         $deleteMenu = DB::table('menu')>update(['isActive' => 0])->where('restaurant_id', $id);
-    }
+    }.
 
     /**
      * Display the specified resource.
