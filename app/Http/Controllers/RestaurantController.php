@@ -72,7 +72,7 @@ class RestaurantController extends Controller
         $resto->isFeatured = 1;
         $resto->save();
     }
-    public function updateRestaurant(){
+    public function updateRestaurant(Request $request){
         $resto = Restaurant::find($request->json()->get('restaurantId'));
         $resto->restaurantName = $request->json()->get('restaurantName');
         $resto->owner = $request->json()->get('owner');
