@@ -89,10 +89,13 @@ class RestaurantController extends Controller
         $resto->save();
 
     }
-
+    public function activateRestaurant($id){
+        $activate = DB::table('restaurants')->update(['isActive' => 1])->where('id', $id);
+        $activate = DB::table('menu')>update(['isActive' => 1])->where('restaurant_id', $id);
+    }
     public function deleteRestaurant($id){
-        $deleteResto = DB::table('restaurants')->update(['isActive' => 0])->where('id', $id)->delete();
-        $deleteMenu = DB::table('menu')>update(['isActive' => 0])->where('restaurant_id', $id)->delete();
+        $deleteResto = DB::table('restaurants')->update(['isActive' => 0])->where('id', $id);
+        $deleteMenu = DB::table('menu')>update(['isActive' => 0])->where('restaurant_id', $id);
     }
 
     /**
