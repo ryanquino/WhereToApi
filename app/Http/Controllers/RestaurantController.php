@@ -149,7 +149,7 @@ class RestaurantController extends Controller
             ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber', 'restaurants.imagePath')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
             ->where('isFeatured', '=', 1)
-            ->where('restaurants.isActive','=', 1)->get();
+            ->where('isActive', '=', 1)->get();
 
         return response()->json($featuredResto);
     }
