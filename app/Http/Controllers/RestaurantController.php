@@ -163,7 +163,7 @@ class RestaurantController extends Controller
     }
 
     public function getRestaurantById($id){
-        $resto = Restaurant::find($id)->where('restaurants.isActive', 1);
+        $resto = Restaurant::where('id', $id)->where('isActive', 1)->first();
 
         return response()->json($resto);
     }
