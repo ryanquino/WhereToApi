@@ -50,6 +50,8 @@ class RestaurantController extends Controller
         $resto = new Restaurant;
 
         $resto->restaurantName = $request->json()->get('restaurantName');
+        $resto->owner = $request->json()->get('owner');
+        $resto->representative = $request->json()->get('representative');
         $resto->address = $request->json()->get('address');
         $resto->barangayId = $request->json()->get('barangayId');
         $resto->contactNumber = $request->json()->get('contactNumber');
@@ -63,9 +65,6 @@ class RestaurantController extends Controller
 
         $restaurantId = $resto->id;
 
-        $restautantDetails = DB::table('restaurant_details')
-            ->insert(['restaurantId' => $restaurantId, 'owner' => $request->json()->get('owner'), 'representative' => $request->json()->get('representative')]);
-
         return response()->json($restaurantId);
     }
     public function makeRestaurantFeatured($id){
@@ -76,6 +75,8 @@ class RestaurantController extends Controller
     public function updateRestaurant(){
         $resto = Restaurant::find($request->json()->get('restaurantId'));
         $resto->restaurantName = $request->json()->get('restaurantName');
+        $resto->owner = $request->json()->get('owner');
+        $resto->representative = $request->json()->get('representative');
         $resto->address = $request->json()->get('address');
         $resto->barangayId = $request->json()->get('barangayId');
         $resto->contactNumber = $request->json()->get('contactNumber');
@@ -86,6 +87,12 @@ class RestaurantController extends Controller
         $resto->imagePath = $request->json()->get('imagePath');
         $resto->status = 1;
         $resto->save();
+
+    }
+
+    public function deleteRestaurant($id){
+        $deleteResto = DB::table('restaurants')->where('id', $id)->delete();
+        $deleteMenu = DB::table('menu')->where('restaurant_id', $id)->delete();
     }
 
     /**

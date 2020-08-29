@@ -48,6 +48,7 @@ Route::get('checkRiderIfSuspended/{id}', 'UserController@checkRiderIfSuspended')
 Route::post('changePassword', 'UserController@changePassword');
 Route::post('cancelOrder/{id}', 'OrderController@cancelOrder');
 //admin side
+Route::post('deleteRestaurant/{id}', 'RestaurantController@deleteRestaurant');
 Route::get('getMenuById/{id}', 'MenuController@getMenuById');
 Route::get('getRestaurantById/{id}', 'RestaurantController@getRestaurantById');
 Route::post('addRider', 'UserController@addRider');
