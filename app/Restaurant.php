@@ -8,7 +8,7 @@ class Restaurant extends Model
 {
     //
 	protected $fillable = [
-        'restaurantName', 'owner','representative', 'address', 'barangayId','contactNumber', 'openTime', 'closingTime', 'closeOn', 'isFeatured', 'status','imagePath'
+        'restaurantName', 'owner','representative', 'address', 'barangayId','contactNumber', 'openTime', 'closingTime', 'closeOn', 'isFeatured', 'status', 'imagePath'
     ];
 
     public function menu()

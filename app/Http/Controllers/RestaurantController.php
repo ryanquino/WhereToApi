@@ -96,7 +96,7 @@ class RestaurantController extends Controller
     public function deleteRestaurant($id){
         $deleteResto = DB::table('restaurants')->update(['isActive' => 0])->where('id', $id);
         $deleteMenu = DB::table('menu')>update(['isActive' => 0])->where('restaurant_id', $id);
-    }.
+    }
 
     /**
      * Display the specified resource.
@@ -144,13 +144,14 @@ class RestaurantController extends Controller
     }
 
     public function getFeaturedRestaurant(){
-        $resto = Restaurant::where('isFeatured', 1);
+        $resto = Restaurant::where('isFeatured', 1)
+            ->where('isActive', 1)->get();
 
         return response()->json($resto);
     }
 
     public function getRestaurantById($id){
-        $resto = Restaurant::where('id', $id);
+        $resto = Restaurant::where('id', $id)->where('isActive', 1)->first();
 
         return response()->json($resto);
     }
