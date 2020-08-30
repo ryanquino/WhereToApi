@@ -76,6 +76,7 @@ class UserController extends Controller
                     return response()->json(['suspended'=>true]);
                 }
                 else{
+
                     if($this->checkRiderRemittance($user['id'])){
                         return response()->json(['remitPending'=>true]);
                     }
@@ -179,17 +180,21 @@ class UserController extends Controller
                 ->select(DB::raw('date(created_at) as createdDate'))
                 ->latest()
                 ->first();
-return response()->json($date->createdDate == date('Y-m-d'));
 
-
-            $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
-
-            if(empty($remitStatus[0]->imagePath)){
-                return response()->json(true);
+            if($date->createdDate == date('Y-m-d')){
+                return response()->json(false);
             }
             else{
-                return response()->json(false);
-            } 
+               $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
+
+                if(empty($remitStatus[0]->imagePath)){
+                    return response()->json(true);
+                }
+                else{
+                    return response()->json(false);
+                }  
+            }
+            
         }
                
     }
