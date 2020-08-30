@@ -64,7 +64,7 @@ Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerifica
 Route::get('viewRiderRemittance', 'RemitController@viewRiderRemittance');
 Route::get('viewUnremittedList', 'RemitController@viewUnremittedList');
 Route::get('viewRemittedList', 'RemitController@viewRemittedList');
-Route::get('checkRiderRemittance/{id}', 'RemitController@checkRiderRemittance');
+Route::get('checkRiderRemittance/{id}', 'UserController@checkRiderRemittance');
 Route::get('getRiderRemit/{id}', 'RemitController@getRiderRemit');
 Route::post('getUserVerification/{id}', 'VerificationController@getUserVerification');
 Route::post('updateVerification', 'VerificationController@updateVerification');
