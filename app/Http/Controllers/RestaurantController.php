@@ -144,12 +144,10 @@ class RestaurantController extends Controller
     }
 
     public function getFeaturedRestaurant(){
-        $featuredResto = DB::table('restaurants')
-            ->select('restaurants.id', 'restaurants.restaurantName', 'restaurants.address', 'barangay.barangayName', 'restaurants.contactNumber', 'restaurants.imagePath')
-            ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->where('isFeatured', 1)
+        $resto = Restaurant::where('isFeatured', 1)
             ->where('isActive', 1)->get();
-        return response()->json($featuredResto);
+
+        return response()->json($resto);
     }
 
     public function getRestaurantById($id){
