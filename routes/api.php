@@ -75,7 +75,7 @@ Route::post('updateMenu', 'MenuController@updateMenu');
 Route::post('updateRestaurant', 'RestaurantController@updateRestaurant');
 Route::post('makeMenuFeatured/{id}', 'MenuController@makeMenuFeatured');
 Route::post('makeRestaurantFeatured/{id}', 'RestaurantController@makeRestaurantFeatured');
-
+Route::get('getRestaurantSalesReport', 'ReportController@getRestaurantSalesReport');
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
 
