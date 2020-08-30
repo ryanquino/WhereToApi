@@ -179,7 +179,7 @@ class UserController extends Controller
                 ->select(DB::raw('date(created_at)'))
                 ->latest()
                 ->first();
-return response()->json($date);
+return response()->json($date->date(created_at));
 
 
             $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
