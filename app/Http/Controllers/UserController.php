@@ -175,6 +175,12 @@ class UserController extends Controller
             return response()->json(false);
         }
         else{
+            $date = Remittance::where('riderId', $id)
+                ->latest()
+                ->first();
+
+            return response()->json($date);
+
             $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
 
             if(empty($remitStatus[0]->imagePath)){
