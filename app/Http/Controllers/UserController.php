@@ -172,7 +172,7 @@ class UserController extends Controller
 
     public function checkRiderRemittance($id){
         if(Remittance::where('riderId', $id)->count() == 0){
-            return false;
+            return response()->json(false);
         }
         else{
             $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
@@ -181,7 +181,7 @@ class UserController extends Controller
                 return response()->json($remitStatus);
             }
             else{
-                return false;
+                return response()->json(false);
             } 
         }
                
