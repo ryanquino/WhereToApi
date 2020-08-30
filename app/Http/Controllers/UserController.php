@@ -173,12 +173,13 @@ class UserController extends Controller
     public function checkRiderRemittance($id){
         $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
 
-        if(empty($remitStatus[0]->imagePath)){
-            return false;
-        }
-        else if($remitStatus[0]->imagePath == NULL){
+        if($remitStatus[0]->imagePath == NULL){
             return true;
         }
+        else if(empty($remitStatus[0]->imagePath)){
+            return false;
+        }
+        
         else{
             return false;
         }        
