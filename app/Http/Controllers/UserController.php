@@ -176,10 +176,9 @@ class UserController extends Controller
         }
         else{
             $date = Remittance::where('riderId', $id)
-                ->select(DB::raw('date(created_at)'))
                 ->latest()
                 ->first();
-return response()->json($date->created_at);
+return response()->json($date->created_at == date('Y-m-d'));
 
 
             $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
