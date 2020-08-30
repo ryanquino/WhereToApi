@@ -171,17 +171,20 @@ class UserController extends Controller
     }
 
     public function checkRiderRemittance($id){
-        $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
-
-        if(empty($remitStatus[0]->imagePath)){
+        if(Remittance::where('riderId', $id)->count() == 0){
             return false;
-        }
-        else if($remitStatus[0]->imagePath == NULL){
-            return true;
         }
         else{
-            return false;
-        }        
+            $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
+
+            if($remitStatus[0]->imagePath == NULL){
+                return true;
+            }
+            else{
+                return false;
+            } 
+        }
+               
     }
     public function getAuthenticatedUser()
     {
