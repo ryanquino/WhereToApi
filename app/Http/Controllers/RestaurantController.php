@@ -144,14 +144,13 @@ class RestaurantController extends Controller
     }
 
     public function getFeaturedRestaurant(){
-        $resto = Restaurant::where('isFeatured', 1)
-            ->where('isActive', 1)->get();
+        $resto = Restaurant::where('isFeatured', 1);
 
         return response()->json($resto);
     }
 
     public function getRestaurantById($id){
-        $resto = Restaurant::where('id', $id)->where('isActive', 1)->first();
+        $resto = Restaurant::where('id', $id);
 
         return response()->json($resto);
     }
