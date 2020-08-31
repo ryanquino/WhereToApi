@@ -169,6 +169,8 @@ class OrderController extends Controller
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
             ->select('transactions.id','users.name', 'barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
             ->where('transactions.id', '=', $id)
+            ->where('transactions.riderId', NULL)
+            ->where('transactions.status', '=', 0)
             ->get();
 
         return response()->json($details);
