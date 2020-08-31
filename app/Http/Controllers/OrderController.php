@@ -161,7 +161,7 @@ class OrderController extends Controller
         return response()->json($menu);
     }
 
-    public function getTransactionDetails($){
+    public function getTransactionDetails(){
         $details = DB::table('transactions')
             ->join('users', 'users.id', '=', 'transactions.clientId')
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
