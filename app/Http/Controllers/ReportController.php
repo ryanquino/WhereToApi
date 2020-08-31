@@ -24,4 +24,10 @@ class ReportController extends Controller
 
     	return response()->json($report);
     }
+
+    public function getTotalRestaurantSalesReport(){
+    	$total = DB::select('Select SUM(menu.price *food_orders.quantity) as totalAmount from transactions join food_orders on food_orders.transactionId = transactions.id join menu on menu.id = food_orders.menuId where transactions.restaurantId = ? and date(transactions.created_at) BETWEEN ? and ?', [$restaurantId, $dateFrom, $dateTo]);
+
+    	return response()->json($total);
+    }
 }
