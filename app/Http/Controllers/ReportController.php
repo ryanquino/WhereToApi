@@ -25,7 +25,7 @@ class ReportController extends Controller
     	return response()->json($report);
     }
 
-    public function getTotalRestaurantSalesReport(){
+    public function getTotalRestaurantSalesReport(Request $request){
     	$restaurantId = $request->json()->get('restaurantId');
     	$dateFrom = $request->json()->get('dateFrom');
     	$dateTo = $request->json()->get('dateTo');
