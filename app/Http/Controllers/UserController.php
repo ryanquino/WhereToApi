@@ -78,7 +78,7 @@ class UserController extends Controller
                 else{
 
                     if($this->checkRiderRemittance($user['id'])){
-                        return response()->json(['remitPending'=>true]);
+                        return response()->json(['remitPending'=>true, 'user'=> $user]);
                     }
                     else{
                         $this->addRemittanceRecord($user['id']);
