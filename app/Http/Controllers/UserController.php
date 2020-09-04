@@ -228,7 +228,7 @@ class UserController extends Controller
     public function getAllRiderPlayerId(){
         $details = DB::table('notification_device')
                         ->join('users', 'users.id', '=', 'notification_device.userId')
-                        ->select('notification_device.deviceId', 'status')
+                        ->select('notification_device.deviceId', 'notification_device.status')
                         ->where('userType', '=', 1)
                         ->where('notification_device.status', 0)
                         ->get();
