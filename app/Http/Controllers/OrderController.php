@@ -242,7 +242,7 @@ class OrderController extends Controller
             for ($i=0; $i < count($menuList); $i++) { 
                 $increment = DB::table('menu')->where('id','=',$menuList[$i]->menuId)->increment('timesBought', $menuList[$i]->quantity);
             }
-            $assign = PushNotificationDevice::where('riderId', $order->riderId)->update(['status' => 0]);
+            $assign = PushNotificationDevice::where('userId', $order->riderId)->update(['status' => 0]);
             return response()->json(true);
         }
         else{
