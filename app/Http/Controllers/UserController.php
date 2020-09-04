@@ -364,4 +364,13 @@ class UserController extends Controller
         $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
     }
 
+    public function updateAddress(Request $request){
+        $userId = $request->json()->get('userId');
+        $newAddress = $request->json()->get('newAddress');
+        $user = User::find($userId);
+
+        $user->address = $newAddress;
+        $user->save();
+    }
+
 }

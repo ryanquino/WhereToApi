@@ -32,6 +32,7 @@ Route::get('getAllAdminDeviceId', 'UserController@getAllAdminDeviceId');
 Route::get('getCurrentUser', 'UserController@getCurrentUser');
 Route::get('getAllMenu', 'MenuController@getAllMenu');
 Route::post('putOrder', 'OrderController@putOrder');
+Route::post('updateAddress', 'UserController@updateAddress');
 Route::post('goOffline/{id}', 'UserController@goOffline');
 Route::post('register', 'UserController@register');
 Route::post('assignRider', 'OrderController@assignRider');
