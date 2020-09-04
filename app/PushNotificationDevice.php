@@ -10,7 +10,7 @@ class PushNotificationDevice extends Model
     protected $table = "notification_device";
 
     protected $fillable = [
-        'userId', 'deviceId'
+        'userId', 'deviceId', 'status'
     ];
 
     public function user()

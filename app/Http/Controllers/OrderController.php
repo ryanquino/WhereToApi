@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Menu;
 use App\User;
+use App\PushNotificationDevice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -211,6 +212,8 @@ class OrderController extends Controller
             $order->status = 1;            
             $order->save();
 
+            $assign = PushNotificationDevice::where('riderId', $riderId)->update(['status' => 1]);
+
             return response()->json(true);
         }
         else{
@@ -237,6 +240,7 @@ class OrderController extends Controller
             for ($i=0; $i < count($menuList); $i++) { 
                 $increment = DB::table('menu')->where('id','=',$menuList[$i]->menuId)->increment('timesBought', $menuList[$i]->quantity);
             }
+            $assign = PushNotificationDevice::where('riderId', $riderId)->update(['status' => 0]);
             return response()->json(true);
         }
         else{

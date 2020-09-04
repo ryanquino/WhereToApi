@@ -228,7 +228,7 @@ class UserController extends Controller
     public function getAllRiderPlayerId(){
         $details = DB::table('notification_device')
                         ->join('users', 'users.id', '=', 'notification_device.userId')
-                        ->select('notification_device.deviceId')
+                        ->select('notification_device.deviceId', 'status')
                         ->where('userType', '=', 1)
                         ->get();
 
@@ -362,4 +362,5 @@ class UserController extends Controller
     public function unSuspendRider($id){
         $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
     }
+
 }
