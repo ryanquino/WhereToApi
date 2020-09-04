@@ -212,7 +212,8 @@ class OrderController extends Controller
             $order->status = 1;            
             $order->save();
 
-            $assign = PushNotificationDevice::where('userId', $riderId)->update(['status' => 1]);
+            $assign = PushNotificationDevice::where('userId', $request->json()->get('riderId'))
+                ->update(['status' => 1]);
 
             return response()->json(true);
         }
