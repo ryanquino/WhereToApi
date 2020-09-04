@@ -230,6 +230,7 @@ class UserController extends Controller
                         ->join('users', 'users.id', '=', 'notification_device.userId')
                         ->select('notification_device.deviceId', 'status')
                         ->where('userType', '=', 1)
+                        ->where('notification_device.status', 0)
                         ->get();
 
         return response()->json($details);
@@ -239,7 +240,7 @@ class UserController extends Controller
     public function getUserDeviceId($id){
         $details = DB::table('notification_device')
                         ->select('notification_device.deviceId')
-                        ->where('userId', '=', $id)
+                        ->where('userId', '=', $id)                        
                         ->get();
 
         return response()->json($details);
