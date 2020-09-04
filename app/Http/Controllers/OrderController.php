@@ -223,6 +223,7 @@ class OrderController extends Controller
         
     }
 
+
     public function cancelOrder($id){
         $order = DB::table('transactions')->where('id', $id)->delete();
         $order = DB::table('food_orders')->where('transactionId', $id)->delete();
@@ -267,5 +268,14 @@ class OrderController extends Controller
         else{
             return response()->json(false);
         }
+    }
+
+    public function updateAddress(Request $request){
+        $transactionId = $request->json()->get('transactionId');
+        $deliveryAddress = $request->json()->get('deliveryAddress');
+        $order = Order::find($transactionId);
+
+        $order->deliveryAddress = $deliveryAddress;
+        $order->save();
     }
 }
