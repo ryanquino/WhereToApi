@@ -17,13 +17,13 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('vendor/icofont/icofont.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-  <link href="{{ asset('vendor/venobox/venobox.css')}}" rel="stylesheet">
-  <link href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/icofont/icofont.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/venobox/venobox.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('style/aos/aos.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('css/style.css')}}" rel="stylesheet">
@@ -268,16 +268,16 @@
 <!--   <div id="preloader"></div> -->
 
   <!-- Vendor JS Files -->
-  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
-  <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
-  <script src="{{ asset('vendor/waypoints/jquery.waypoints.min.js') }}"></script>
-  <script src="{{ asset('vendor/counterup/counterup.min.js') }}"></script>
-  <script src="{{ asset('vendor/venobox/venobox.min.js') }}"></script>
-  <script src="{{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
-  <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-  <script src="{{ asset('vendor/aos/aos.js') }}"></script>
+  <script src="{{ asset('style/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('style/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('style/jquery.easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ asset('style/php-email-form/validate.js') }}"></script>
+  <script src="{{ asset('style/waypoints/jquery.waypoints.min.js') }}"></script>
+  <script src="{{ asset('style/counterup/counterup.min.js') }}"></script>
+  <script src="{{ asset('style/venobox/venobox.min.js') }}"></script>
+  <script src="{{ asset('style/owl.carousel/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('style/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ asset('style/aos/aos.js') }}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('js/main.js') }}"></script>
