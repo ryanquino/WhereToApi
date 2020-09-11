@@ -50,7 +50,7 @@ Route::get('checkRiderIfSuspended/{id}', 'UserController@checkRiderIfSuspended')
 Route::post('changePassword', 'UserController@changePassword');
 Route::post('cancelOrder/{id}', 'OrderController@cancelOrder');
 Route::post('assignNewAddress', 'DeliveryAddressController@assignNewAddress');
-Route::post('getUserDeliveryAddress/{id}', 'DeliveryAddressController@getUserDeliveryAddress');
+Route::get('getUserDeliveryAddress/{id}', 'DeliveryAddressController@getUserDeliveryAddress');
 //admin side
 Route::post('deleteRestaurant/{id}', 'RestaurantController@deleteRestaurant');
 Route::get('getMenuById/{id}', 'MenuController@getMenuById');
