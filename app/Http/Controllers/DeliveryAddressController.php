@@ -90,9 +90,13 @@ class DeliveryAddressController extends Controller
         $latitude = $request->json()->get('latitude');
         $longitude = $request->json()->get('longitude');
 
-        $user = User::find($userId);
-        $newAddress = DeliveryAddress(['addressName' => $addressName, 'latitude' => $latitude, 'longitude' => $longitude]);
-        $user->deliveryAddress()->save($newAddress);
+        $address = new DeliveryAddress;
+        $address->userId  = $userId;
+        $address->addressName = $addressName;
+        $addressName->latitude = $latitude;
+        $addressName->longitude = $longitude;
+        $address->save();
+
     }
 
     public function getUserDeliveryAddress($id){
