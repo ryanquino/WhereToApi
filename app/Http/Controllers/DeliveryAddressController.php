@@ -93,8 +93,8 @@ class DeliveryAddressController extends Controller
         $address = new DeliveryAddress;
         $address->userId  = $userId;
         $address->addressName = $addressName;
-        $addressName->latitude = $latitude;
-        $addressName->longitude = $longitude;
+        $address->latitude = $latitude;
+        $address->longitude = $longitude;
         $address->save();
 
     }
