@@ -364,6 +364,7 @@ class UserController extends Controller
         $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
     }
 
+    
 
 
 }

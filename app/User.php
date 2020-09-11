@@ -48,4 +48,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne('App\Remittance', 'userId');
     }
+    public function deliveryAddress()
+    {
+        return $this->hasMany('App\Models\DeliveryAddress', 'userId');
+    }
 }
