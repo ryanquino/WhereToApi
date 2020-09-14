@@ -52,7 +52,7 @@ class ReportController extends Controller
         $dateFrom = $request->json()->get('dateFrom');
         $dateTo = $request->json()->get('dateTo');
 
-        $total = DB::select('SELECT SUM(amount) from remittance where date(remittance.created_at) BETWEEN ? and ?', [$restaurantId, $dateFrom, $dateTo]);
+        $total = DB::select('SELECT SUM(amount) from remittance where date(remittance.created_at) BETWEEN ? and ?', [$dateFrom, $dateTo]);
 
         return response()->json($total);
     }
