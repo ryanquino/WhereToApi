@@ -148,7 +148,7 @@ class MenuController extends Controller
             ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'menu.categoryId', 'menu.isFeatured','categories.categoryName', 'menu.imagePath')
+            ->select('menu.id as menuId', 'restaurants.id as restaurantId','restaurants.restaurantName','restaurants.address','barangay.barangayName','menu.menuName', 'menu.categoryId', 'menu.isFeatured', 'menu.price','categories.categoryName', 'menu.imagePath')
             ->where('menu.isActive', '=',1)
             ->get();
             

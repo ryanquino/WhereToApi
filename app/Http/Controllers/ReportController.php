@@ -33,4 +33,27 @@ class ReportController extends Controller
 
     	return response()->json($total);
     }
+
+    public function getRemittanceList(Request $request){
+        $dateFrom = $request->json()->get('dateFrom');
+        $dateTo = $request->json()->get('dateTo');
+
+        $list = DB::table('remittance')
+            ->join('users', 'users.id', '=', 'remittance.riderId')
+            ->select('users.name', 'remittace.amount', 'remittance.created_at')
+            ->where('remittance.status', 1)
+            ->whereBetween('remittance.created_at', [$dateFrom, $dateTo])
+            ->get();
+
+        return response()->json($list);
+    }
+
+    public function getTotalSalesCommission(Request $request){
+        $dateFrom = $request->json()->get('dateFrom');
+        $dateTo = $request->json()->get('dateTo');
+
+        $total = DB::select('SELECT SUM(amount) from remittance where date(remittance.created_at) BETWEEN ? and ?', [$restaurantId, $dateFrom, $dateTo]);
+
+        return response()->json($total);
+    }
 }

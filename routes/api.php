@@ -81,6 +81,9 @@ Route::post('makeMenuFeatured/{id}', 'MenuController@makeMenuFeatured');
 Route::post('makeRestaurantFeatured/{id}', 'RestaurantController@makeRestaurantFeatured');
 Route::post('getRestaurantSalesReport', 'ReportController@getRestaurantSalesReport');
 Route::post('getTotalRestaurantSalesReport', 'ReportController@getTotalRestaurantSalesReport');
+Route::post('getRemittanceList', 'ReportController@getRemittanceList');
+Route::post('getTotalSalesCommission', 'ReportController@getTotalSalesCommission');
+
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
 
