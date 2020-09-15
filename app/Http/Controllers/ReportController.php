@@ -40,7 +40,7 @@ class ReportController extends Controller
 
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
-            ->select('users.name', 'remittace.amount', 'remittance.created_at')
+            ->select('users.name', 'remittance.amount', 'remittance.created_at')
             ->where('remittance.status', 1)
             ->whereBetween('remittance.created_at', [$dateFrom, $dateTo])
             ->get();
