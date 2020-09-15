@@ -185,7 +185,7 @@ class UserController extends Controller
                 return false;
             }
             else{
-               $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) = CURDATE()-1', [$id]);
+               $remitStatus = DB::select('SELECT imagePath from remittance where riderId = ? and date(created_at) < CURDATE()', [$id])->latest();
 
                 if(empty($remitStatus[0]->imagePath)){
                     return true;
