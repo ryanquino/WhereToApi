@@ -67,7 +67,7 @@ class ReportController extends Controller
             ->where('transactions.id', $id)
             ->get();
 
-        $orders = DB::table('menu')
+        $orders = DB::table('transactions')
             ->join('food_orders', 'food_orders.transactionId', '=', 'transactions.id')
             ->join('menu', 'food_orders.menuId', '=', 'menu.id')
             ->join('users', 'users.id', '=', 'transactions.clientId')
@@ -80,7 +80,7 @@ class ReportController extends Controller
             ->select('users.name', 'users.contactNumber')
             ->where('transactions.id', $id)
             ->get();
-
+return response()->json($details);
         return response()->json(array('transactionDetails' => $details, 'orders' => $orders, 'riderDetails' => $rider));
     }
 }
