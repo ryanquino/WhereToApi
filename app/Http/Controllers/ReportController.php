@@ -15,7 +15,7 @@ class ReportController extends Controller
     	$report = DB::table('transactions')
     		->join('food_orders', 'food_orders.transactionId', '=', 'transactions.id')
     		->join('menu', 'food_orders.menuId', '=', 'menu.id')
-    		->select(DB::raw('transactions.id, transactions.deliveryAddress, menu.menuName, menu.price, food_orders.quantity, (menu.price *food_orders.quantity) as total'))
+    		->select(DB::raw('transactions.id, menu.menuName, menu.price, food_orders.quantity, (menu.price *food_orders.quantity) as total'))
     		->where('transactions.restaurantId', $restaurantId)
     		->whereBetween('transactions.created_at', [$dateFrom, $dateTo])
     		->get();
@@ -63,7 +63,7 @@ class ReportController extends Controller
             ->join('users', 'users.id', '=', 'transactions.clientId')
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
-            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'transactions.deliveryCharge')
+            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.created_at', 'transactions.deliveryCharge')
             ->where('transactions.id', $id)
             ->get();
 
