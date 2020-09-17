@@ -80,7 +80,7 @@ class ReportController extends Controller
             ->select('users.name', 'users.contactNumber')
             ->where('transactions.id', $id)
             ->get();
-return response()->json($details);
+
         return response()->json(array('transactionDetails' => $details, 'orders' => $orders, 'riderDetails' => $rider));
     }
 }
