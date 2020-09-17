@@ -63,7 +63,7 @@ class ReportController extends Controller
             ->join('users', 'users.id', '=', 'transactions.clientId')
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
-            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.created_at', 'transactions.deliveryCharge')
+            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','restaurants.restaurantName', 'transactions.created_at', 'transactions.deliveryCharge')
             ->where('transactions.id', $id)
             ->get();
 

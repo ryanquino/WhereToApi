@@ -25,7 +25,6 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|max:55|unique:users',
                 'contactNumber' => 'required|string|max:11|unique:users',
-                'address' => 'required|string|max:255',
                 'password' => 'required|string|min:6', 
             ]);
 
@@ -39,7 +38,8 @@ class UserController extends Controller
                 'name' => $request->json()->get('name'),
                 'email' => $request->json()->get('email'),
                 'contactNumber' => $request->json()->get('contactNumber'),
-                'address' => $request->json()->get('address'),
+                'latitude' => $request->json()->get('latitude'),
+                'longitude' => $request->json()->get('longitude'),
                 'password' => Hash::make($request->json()->get('password')),
                 'status' => 1,
                 'userType' => 0,
@@ -307,7 +307,8 @@ class UserController extends Controller
         $rider->name = $request->json()->get('name');
         $rider->email = $request->json()->get('email');
         $rider->contactNumber = $request->json()->get('contactNumber');
-        $rider->address = $request->json()->get('address');
+        $rider->latitude = $request->json()->get('latitude');
+        $rider->longitude = $request->json()->get('longitude');
         $rider->barangayId = $request->json()->get('barangayId');
         $rider->password = Hash::make("temppass");
         $rider->status = 0;

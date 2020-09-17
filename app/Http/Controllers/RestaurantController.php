@@ -39,7 +39,6 @@ class RestaurantController extends Controller
         //
         $validator = Validator::make($request->json()->all() , [
                 'restaurantName' => 'required|string|max:255',
-                'address' => 'required|string|max:255',
                 'contactNumber' => 'required|string|max:11'
             ]);
         if($validator->fails()){
@@ -52,7 +51,8 @@ class RestaurantController extends Controller
         $resto->restaurantName = $request->json()->get('restaurantName');
         $resto->owner = $request->json()->get('owner');
         $resto->representative = $request->json()->get('representative');
-        $resto->address = $request->json()->get('address');
+        $resto->latitude = $request->json()->get('latitude');
+        $resto->longitude = $request->json()->get('longitude');
         $resto->barangayId = $request->json()->get('barangayId');
         $resto->contactNumber = $request->json()->get('contactNumber');
         $resto->openTime = $request->json()->get('openTime');
@@ -77,7 +77,8 @@ class RestaurantController extends Controller
         $resto->restaurantName = $request->json()->get('restaurantName');
         $resto->owner = $request->json()->get('owner');
         $resto->representative = $request->json()->get('representative');
-        $resto->address = $request->json()->get('address');
+        $resto->latitude = $request->json()->get('latitude');
+        $resto->longitude = $request->json()->get('longitude');
         $resto->barangayId = $request->json()->get('barangayId');
         $resto->contactNumber = $request->json()->get('contactNumber');
         $resto->openTime = $request->json()->get('openTime');
