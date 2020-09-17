@@ -91,7 +91,7 @@ class MenuController extends Controller
         $menu = DB::table('menu')
             ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
-            ->select(DB::raw('menu.id as menuId, restaurants.id as restaurantId,restaurants.restaurantName, menu.menuName, menu.description , menu.imagePath, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice'))
+            ->select(DB::raw('menu.id as menuId, restaurants.id as restaurantId,restaurants.restaurantName, restaurants.latitude, restaurants.longitude, menu.menuName, menu.description , menu.imagePath, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice'))
             ->where('categoryId' , '=', $id)
             ->where('menu.isActive','=', 1)
             ->get();
@@ -149,7 +149,7 @@ class MenuController extends Controller
             ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
-            ->select(DB::raw('menu.id as menuId, restaurants.id as restaurantId,restaurants.restaurantName, restaurants.address, barangay.barangayName, menu.menuName, menu.categoryId, menu.isFeatured, categories.categoryName, menu.imagePath, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice'))
+            ->select(DB::raw('menu.id as menuId, restaurants.id as restaurantId,restaurants.restaurantName, restaurants.latitude, restaurants.longitude, barangay.barangayName, menu.menuName, menu.categoryId, menu.isFeatured, categories.categoryName, menu.imagePath, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice'))
             ->where('menu.isActive', '=',1)
             ->get();
             
