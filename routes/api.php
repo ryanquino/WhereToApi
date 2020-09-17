@@ -83,6 +83,7 @@ Route::post('getRestaurantSalesReport', 'ReportController@getRestaurantSalesRepo
 Route::post('getTotalRestaurantSalesReport', 'ReportController@getTotalRestaurantSalesReport');
 Route::post('getRemittanceList', 'ReportController@getRemittanceList');
 Route::post('getTotalSalesCommission', 'ReportController@getTotalSalesCommission');
+Route::get('getReceipt/{id}', 'ReportController@getReceipt');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');
