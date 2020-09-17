@@ -71,7 +71,7 @@ class ReportController extends Controller
             ->join('food_orders', 'food_orders.transactionId', '=', 'transactions.id')
             ->join('menu', 'food_orders.menuId', '=', 'menu.id')
             ->join('users', 'users.id', '=', 'transactions.clientId')
-            ->select(DB::raw('menu.menuName, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice, food_orders.quantity, (totalPrice *food_orders.quantity) as total'))
+            ->select(DB::raw('menu.menuName, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice, food_orders.quantity, (((menu.price * menu.markUpPercentage) + menu.price)*food_orders.quantity) as total'))
             ->where('transactions.id', $id)
             ->get();
 
