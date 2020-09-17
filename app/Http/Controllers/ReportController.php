@@ -56,4 +56,31 @@ class ReportController extends Controller
 
         return response()->json($total);
     }
+
+    public function getReceipt($id){
+
+        $details = DB::table('transactions')
+            ->join('users', 'users.id', '=', 'transactions.clientId')
+            ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
+            ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
+            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','restaurants.restaurantName','restaurants.address', 'transactions.deliveryAddress', 'transactions.created_at', 'transactions.deliveryCharge')
+            ->where('transactions.id', $id)
+            ->get();
+
+        $orders = DB::table('transactions')
+            ->join('food_orders', 'food_orders.transactionId', '=', 'transactions.id')
+            ->join('menu', 'food_orders.menuId', '=', 'menu.id')
+            ->join('users', 'users.id', '=', 'transactions.clientId')
+            ->select(DB::raw('menu.menuName, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice, food_orders.quantity, (totalPrice *food_orders.quantity) as total'))
+            ->where('transactions.id', $id)
+            ->get();
+
+        $rider = DB::table('users')
+            ->join('transactions', 'users.id', '=', 'transactions.riderId')
+            ->select('users.name', 'users.contactNumber')
+            ->where('transactions.id', $id)
+            ->get();
+
+        return response()->json(array('transactionDetails' => $details, 'orders' => $orders, 'riderDetails' => $rider));
+    }
 }
