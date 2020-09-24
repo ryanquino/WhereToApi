@@ -81,6 +81,14 @@ class ReportController extends Controller
             ->where('transactions.id', $id)
             ->get();
 
-        return response()->json(array('transactionDetails' => $details, 'orders' => $orders, 'riderDetails' => $rider));
+        $total = DB::table('transactions')
+            ->join('food_orders', 'food_orders.transactionId', '=', 'transactions.id')
+            ->join('menu', 'food_orders.menuId', '=', 'menu.id')
+            ->join('users', 'users.id', '=', 'transactions.clientId')
+            ->select(DB::raw('SUM(((menu.price * menu.markUpPercentage) + menu.price)*food_orders.quantity) as totalAmount'))
+            ->where('food_orders.transactionId', $id)
+            ->get();
+
+        return response()->json(array('transactionDetails' => $details, 'orders' => $orders, 'riderDetails' => $rider, 'total' => $total));
     }
 }
