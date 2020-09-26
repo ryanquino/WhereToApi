@@ -129,6 +129,7 @@ class MenuController extends Controller
         $menuName = $request->json()->get('menuName');
         $description = $request->json()->get('description');
         $price = $request->json()->get('price');
+        $markUp = $request->json()->get('markUpPercentage');
         $imagePath = $request->json()->get('imagePath');
         $categoryId = $request->json()->get('categoryId');
 
@@ -137,6 +138,7 @@ class MenuController extends Controller
         $menu->menuName = $menuName;
         $menu->description = $description;
         $menu->price = $price;
+        $menu->markUpPercentage = $markUp/100;
         $menu->imagePath = $imagePath;
         $menu->categoryId = $categoryId;
         $menu->isFeatured = 0;
