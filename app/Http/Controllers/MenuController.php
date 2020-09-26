@@ -123,7 +123,7 @@ class MenuController extends Controller
         $menu->save();
     }
 
-    public function updateMenu(){
+    public function updateMenu(Request $request){
         $menuId = $request->json()->get('menuId');
         $restaurantId = $request->json()->get('restaurantId');
         $menuName = $request->json()->get('menuName');
