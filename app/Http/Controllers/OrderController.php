@@ -91,16 +91,14 @@ class OrderController extends Controller
         $userId = $request->json()->get('userId');
         $restaurantId = $request->json()->get('restaurantId');
         $orderList = $request->json()->get('order');
-        $latitude = $request->json()->get('latitude');
-        $longitude = $request->json()->get('longitude');
+        $deliveryAddress = $request->json()->get('deliveryAddress');
         $deliveryCharge = $request->json()->get('deliveryCharge');
         $barangayId = $request->json()->get('barangayId');
 
         $order = new Order;
         $order->clientId = $userId;
         $order->restaurantId = $restaurantId;
-        $order->latitude = $latitude;
-        $order->longitude = $longitude;
+        $order->deliveryAddress = $deliveryAddress;
         $order->deliveryCharge = $deliveryCharge;
         $order->barangayId = $barangayId;
         $order->status = 0;
@@ -169,7 +167,7 @@ class OrderController extends Controller
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
             ->join('notification_device', 'users.id', '=', 'notification_device.userId')
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
-            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','restaurants.restaurantName','restaurants.latitude as restoLatitude', 'restaurants.longitude as restoLongitude', 'transactions.latitude as transLatitude', 'transactions.longitude as transLongitude', 'transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
+            ->select('transactions.id','users.name', 'users.contactNumber','barangay.barangayName','transactions.deliveryAddress', 'transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
             ->where('transactions.riderId', NULL)
             ->where('transactions.status', '=', 0)
             ->get();
@@ -183,7 +181,7 @@ class OrderController extends Controller
             ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
             ->join('notification_device', 'users.id', '=', 'notification_device.userId')
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
-            ->select('transactions.id','users.name', 'users.contactNumber', 'barangay.barangayName','restaurants.restaurantName','restaurants.latitude as restoLatitude', 'restaurants.longitude as restoLongitude', 'transactions.latitude as transLatitude', 'transactions.longitude as transLongitude','transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
+            ->select('transactions.id','users.name', 'users.contactNumber', 'barangay.barangayName','transactions.deliveryAddress','transactions.created_at', 'notification_device.deviceId', 'transactions.riderId', 'transactions.status', 'transactions.deliveryCharge')
             ->where('transactions.id', '=', $id)
             ->get();
 
@@ -194,7 +192,7 @@ class OrderController extends Controller
     public function viewUserOrders($id){
         $currentOrders = DB::table('transactions')
                 ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
-                ->select('transactions.id','restaurants.restaurantName','restaurants.latitude as restoLatitude', 'restaurants.longitude as restoLongitude', 'transactions.latitude as transLatitude', 'transactions.longitude as transLongitude', 'transactions.created_at', 'transactions.riderId', 'transactions.status')
+                ->select('transactions.id','restaurants.restaurantName','transactions.deliveryAddress', 'transactions.created_at', 'transactions.riderId', 'transactions.status')
                 ->where('transactions.clientId', '=', $id)
                 ->get();
 
