@@ -177,10 +177,7 @@ class UserController extends Controller
         }
 
         else{
-            $amount = DB::select('select amount from remittance where riderId = ? and date(created_at) = CURDATE()');
-            if($amount[0]->amount == 0){
-                return false;
-            }
+
             $date = Remittance::where('riderId', $id)
                 ->select(DB::raw('date(created_at) as createdDate'))
                 ->latest()
