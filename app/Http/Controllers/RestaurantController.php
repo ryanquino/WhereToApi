@@ -54,6 +54,7 @@ class RestaurantController extends Controller
         $resto->latitude = $request->json()->get('latitude');
         $resto->longitude = $request->json()->get('longitude');
         $resto->barangayId = $request->json()->get('barangayId');
+        $resto->cityId = $request->json()->get('cityId');
         $resto->contactNumber = $request->json()->get('contactNumber');
         $resto->openTime = $request->json()->get('openTime');
         $resto->closingTime = $request->json()->get('closingTime');
@@ -80,6 +81,7 @@ class RestaurantController extends Controller
         $resto->latitude = $request->json()->get('latitude');
         $resto->longitude = $request->json()->get('longitude');
         $resto->barangayId = $request->json()->get('barangayId');
+        $resto->cityId = $request->json()->get('cityId');
         $resto->contactNumber = $request->json()->get('contactNumber');
         $resto->openTime = $request->json()->get('openTime');
         $resto->closingTime = $request->json()->get('closingTime');
@@ -144,8 +146,8 @@ class RestaurantController extends Controller
         //
     }
 
-    public function getFeaturedRestaurant(){
-        $resto = Restaurant::where('isFeatured', 1)
+    public function getFeaturedRestaurant($id){
+        $resto = Restaurant::where('isFeatured', 1)->where('cityId', $id)
             ->where('isActive', 1)->get();
 
         return response()->json($resto);

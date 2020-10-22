@@ -29,6 +29,7 @@ class ReportController extends Controller
     	$restaurantId = $request->json()->get('restaurantId');
     	$dateFrom = $request->json()->get('dateFrom');
     	$dateTo = $request->json()->get('dateTo');
+
     	$total = DB::select('Select SUM(menu.price *food_orders.quantity) as totalAmount from transactions join food_orders on food_orders.transactionId = transactions.id join menu on menu.id = food_orders.menuId where transactions.restaurantId = ? and date(transactions.created_at) BETWEEN ? and ?', [$restaurantId, $dateFrom, $dateTo]);
 
     	return response()->json($total);
@@ -37,11 +38,13 @@ class ReportController extends Controller
     public function getRemittanceList(Request $request){
         $dateFrom = $request->json()->get('dateFrom');
         $dateTo = $request->json()->get('dateTo');
+        $cityId = $request->json()->get('cityId');
 
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('users.name', 'remittance.amount', 'remittance.created_at')
             ->where('remittance.status', 1)
+            ->where('users.cityId', $cityId)
             ->whereBetween('remittance.created_at', [$dateFrom, $dateTo])
             ->get();
 
@@ -51,8 +54,9 @@ class ReportController extends Controller
     public function getTotalSalesCommission(Request $request){
         $dateFrom = $request->json()->get('dateFrom');
         $dateTo = $request->json()->get('dateTo');
+        $cityId = $request->json()->get('cityId');
 
-        $total = DB::select('SELECT SUM(amount) from remittance where date(remittance.created_at) BETWEEN ? and ?', [$dateFrom, $dateTo]);
+        $total = DB::select('SELECT SUM(amount) from remittance join users on users.id = remittance.riderId where users.cityId = ? date(remittance.created_at) BETWEEN ? and ?', [$cityId, $dateFrom, $dateTo]);
 
         return response()->json($total);
     }

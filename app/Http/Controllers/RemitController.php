@@ -98,30 +98,33 @@ class RemitController extends Controller
 
     }
 
-    public function viewRiderRemittance(){
+    public function viewRiderRemittance($id){
         $remittance = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.imagePath')
             ->where('remittance.status', 0)
+            ->where('users.cityId', $id)
             ->get();
 
         return response()->json($remittance);
     }
-    public function viewRemittedList(){
+    public function viewRemittedList($id){
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
             ->where('remittance.status', 0)
+            ->where('users.cityId', $id)
             ->whereNotNull('remittance.imagePath')->get();
 
 
         return response()->json($list);
     }
-    public function viewUnremittedList(){
+    public function viewUnremittedList($id){
         $list = DB::table('remittance')
             ->join('users', 'users.id', '=', 'remittance.riderId')
             ->select('remittance.id','remittance.riderId', 'users.name', 'remittance.amount','remittance.imagePath', 'remittance.status', 'remittance.created_at')
-            ->where('remittance.imagePath' , NULL)->get();
+            ->where('remittance.imagePath' , NULL)
+            ->where('users.cityId', $id)->get();
 
         return response()->json($list);
     }

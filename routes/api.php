@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('getFeaturedRestaurant', 'RestaurantController@getFeaturedRestaurant');
+Route::get('getFeaturedRestaurant/{id}', 'RestaurantController@getFeaturedRestaurant');
 Route::get('getMenuPerRestaurant/{id}', 'MenuController@getMenuPerRestaurant');
 Route::get('getCategories', 'CategoryController@getCaregoryList');
 Route::get('getMenu/{id}', 'RestaurantController@getRestaurantMenu');
@@ -22,7 +22,7 @@ Route::get('getMenuPerTransaction/{id}', 'OrderController@getOrdersPerTransactio
 Route::get('getTransactionDetailsById/{id}', 'OrderController@getTransactionDetailsById');
 Route::get('getTransactionDetails', 'OrderController@getTransactionDetails');
 Route::get('viewUserOrders/{id}', 'OrderController@viewUserOrders');
-Route::get('getAllPlayerId', 'UserController@getAllRiderPlayerId');
+Route::get('getAllPlayerId/{id}', 'UserController@getAllRiderPlayerId');
 Route::get('getBarangayList', 'BaranggayController@getBarangayList');
 Route::get('getRiderComments/{id}', 'UserController@getRiderComments');
 Route::get('getRiderRating/{id}', 'UserController@getRiderRating');
@@ -30,7 +30,7 @@ Route::get('getRiderDetails/{id}', 'UserController@getRiderDetails');
 Route::get('getUserDeviceId/{id}', 'UserController@getUserDeviceId');
 Route::get('getAllAdminDeviceId', 'UserController@getAllAdminDeviceId');
 Route::get('getCurrentUser', 'UserController@getCurrentUser');
-Route::get('getAllMenu', 'MenuController@getAllMenu');
+Route::get('getAllMenu/{id}', 'MenuController@getAllMenu');
 Route::post('putOrder', 'OrderController@putOrder');
 Route::post('updateAddress', 'OrderController@updateAddress');
 Route::post('goOffline/{id}', 'UserController@goOffline');
@@ -51,6 +51,8 @@ Route::post('changePassword', 'UserController@changePassword');
 Route::post('cancelOrder/{id}', 'OrderController@cancelOrder');
 Route::post('assignNewAddress', 'DeliveryAddressController@assignNewAddress');
 Route::get('getUserDeliveryAddress/{id}', 'DeliveryAddressController@getUserDeliveryAddress');
+Route::post('addCity', 'UserController@addCity');
+Route::get('getCity', 'UserController@getCity');
 //admin side
 Route::post('deleteRestaurant/{id}', 'RestaurantController@deleteRestaurant');
 Route::get('getMenuById/{id}', 'MenuController@getMenuById');
@@ -65,9 +67,9 @@ Route::get('isAccountSuspended/{id}', 'VerificationController@isAccountSuspended
 Route::post('approveRemittance/{id}', 'RemitController@approveRemittance');
 Route::get('getUnverifiedList', 'VerificationController@getUnverifiedList');
 Route::get('viewUserVerification/{id}', 'VerificationController@viewUserVerification');
-Route::get('viewRiderRemittance', 'RemitController@viewRiderRemittance');
-Route::get('viewUnremittedList', 'RemitController@viewUnremittedList');
-Route::get('viewRemittedList', 'RemitController@viewRemittedList');
+Route::get('viewRiderRemittance/{id}', 'RemitController@viewRiderRemittance');
+Route::get('viewUnremittedList/{id}', 'RemitController@viewUnremittedList');
+Route::get('viewRemittedList/{id}', 'RemitController@viewRemittedList');
 Route::get('checkRiderRemittance/{id}', 'UserController@checkRiderRemittance');
 Route::get('getRiderRemit/{id}', 'RemitController@getRiderRemit');
 Route::post('getUserVerification/{id}', 'VerificationController@getUserVerification');
@@ -84,6 +86,7 @@ Route::post('getTotalRestaurantSalesReport', 'ReportController@getTotalRestauran
 Route::post('getRemittanceList', 'ReportController@getRemittanceList');
 Route::post('getTotalSalesCommission', 'ReportController@getTotalSalesCommission');
 Route::get('getReceipt/{id}', 'ReportController@getReceipt');
+Route::post('deleteMenu/{id}', 'MenuController@deleteMenu');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

@@ -227,12 +227,13 @@ class UserController extends Controller
 
     }
 
-    public function getAllRiderPlayerId(){
+    public function getAllRiderPlayerId($id){
         $details = DB::table('notification_device')
                         ->join('users', 'users.id', '=', 'notification_device.userId')
                         ->select('notification_device.deviceId')
                         ->where('userType', '=', 1)
                         ->where('notification_device.status', 0)
+                        ->where('users.cityId',$id)
                         ->get();
 
         return response()->json($details);
@@ -367,7 +368,21 @@ class UserController extends Controller
         $suspend = DB::table('rider_details')->where('riderId', $id)->update(['isSuspended'=> 0]);
     }
 
-    
+    public function addCity(Request $request){
+        $userId = $request->json()->get('userId');
+        $cityId = $request->json()->get('cityId');
+        $barangayId =$request->json()->get('barangayId');
+
+        $city = DB::table('users')
+                    ->where('id', $userId)
+                    ->update(['cityId'=> $cityId, 'barangayId' => $barangayId]);
+    }
+
+    public function getCity(){
+        $city = DB::table('city')->select('id', 'cityName')->get();
+
+        return response()->json($city); 
+    }
 
 
 }

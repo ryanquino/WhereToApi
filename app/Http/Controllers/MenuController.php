@@ -143,13 +143,14 @@ class MenuController extends Controller
 
     }
     
-    public function getAllMenu(){
+    public function getAllMenu($id){
         $menu = DB::table('menu')
             ->join('categories', 'categories.id', '=', 'menu.categoryId')
             ->join('restaurants', 'restaurants.id', '=', 'menu.restaurant_id')
             ->join('barangay', 'barangay.id', '=', 'restaurants.barangayId')
             ->select(DB::raw('menu.id as menuId, restaurants.id as restaurantId,restaurants.restaurantName, restaurants.latitude, restaurants.longitude, barangay.barangayName, menu.menuName, menu.categoryId, menu.isFeatured, categories.categoryName, menu.imagePath, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice'))
             ->where('menu.isActive', '=',1)
+            ->where('restaurants.cityId', '=', $id)
             ->get();
             
         return response()->json($menu);
@@ -169,5 +170,9 @@ class MenuController extends Controller
         $menu = Menu::where('id', $id)->where('isActive', 1)->first();
 
         return response()->json($menu);
+    }
+
+    public function deleteMenu($id){
+        $deleteMenu = Menu::destroy($id);
     }
 }

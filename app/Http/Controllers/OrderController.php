@@ -94,13 +94,17 @@ class OrderController extends Controller
         $deliveryAddress = $request->json()->get('deliveryAddress');
         $deliveryCharge = $request->json()->get('deliveryCharge');
         $barangayId = $request->json()->get('barangayId');
+        $cityId = $request->json()->get('cityId');
 
         $order = new Order;
         $order->clientId = $userId;
         $order->restaurantId = $restaurantId;
         $order->deliveryAddress = $deliveryAddress;
+        $order->latitude = null;
+        $order->longitude = null;
         $order->deliveryCharge = $deliveryCharge;
         $order->barangayId = $barangayId;
+        $order->cityId = $cityId;
         $order->status = 0;
 
         $order->save();
