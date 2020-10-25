@@ -97,7 +97,7 @@ class RestaurantController extends Controller
         $activate = DB::table('menu')->where('restaurant_id', $id)->update(['isActive' => 1]);
     }
     public function deleteRestaurant($id){
-        $deleteResto = DB::table('restaurants')->where('id', $id)->update(['isActive' => 0])
+        $deleteResto = DB::table('restaurants')->where('id', $id)->update(['isActive' => 0]);
         $deleteMenu = DB::table('menu')->where('restaurant_id', $id)->update(['isActive' => 0]);
     }
 
