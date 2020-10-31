@@ -292,10 +292,11 @@ class OrderController extends Controller
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
             ->select('transactions.id', 'users.name', 'restaurants.restaurantName', 'transactions.deliveryAddress', 'barangay.barangayName', 'transactions.deliveryCharge')
             ->where('transactions.cityId', $id)
+            ->where
             ->whereDate('transactions.created_at', date('Y-m-d'))
             ->orderBy('transactions.created_at', 'desc')
             ->get();
-
+        $details = json_decode($details);
         $menu = array();
         for($i=0;$i<count($details);$i++){
             $foodOrders = DB::table('menu')
