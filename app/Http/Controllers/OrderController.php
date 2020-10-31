@@ -301,7 +301,7 @@ class OrderController extends Controller
             ->join('food_orders', 'food_orders.menuId', '=', 'menu.id')
             ->join('transactions', 'transactions.id', '=', 'food_orders.transactionId')
             ->select(DB::raw('menu.id, menu.menuName, menu.description, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice, food_orders.quantity'))
-            ->where('food_orders.transactionId', '=', $details[])
+            ->where('food_orders.transactionId', '=', $details[$i]['transactionId'])
             ->get();
 
             $menu[] = $foodOrders;
