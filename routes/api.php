@@ -86,6 +86,7 @@ Route::post('getTotalRestaurantSalesReport', 'ReportController@getTotalRestauran
 Route::post('getRemittanceList', 'ReportController@getRemittanceList');
 Route::post('getTotalSalesCommission', 'ReportController@getTotalSalesCommission');
 Route::get('getReceipt/{id}', 'ReportController@getReceipt');
+Route::get('ordersOfTheDay/{id}', 'OrderController@ordersOfTheDay');
 Route::post('deleteMenu/{id}', 'MenuController@deleteMenu');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
