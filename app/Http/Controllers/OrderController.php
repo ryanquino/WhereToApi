@@ -295,7 +295,7 @@ class OrderController extends Controller
             ->whereDate('transactions.created_at', date('Y-m-d'))
             ->orderBy('transactions.created_at', 'desc')
             ->get();
-        return response()->json($details[$i]['id']);
+        return response()->json($details[0]['id']);
         $details = json_decode($details);
         $menu = array();
         for($i=0;$i<count($details);$i++){
