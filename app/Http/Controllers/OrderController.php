@@ -295,7 +295,7 @@ class OrderController extends Controller
             ->whereDate('transactions.created_at', date('Y-m-d'))
             ->orderBy('transactions.created_at', 'desc')
             ->get();
-        return response()->json($details);
+        //return response()->json($details);
         $details = json_decode($details);
         $menu = array();
         for($i=0;$i<count($details);$i++){
@@ -303,7 +303,7 @@ class OrderController extends Controller
             ->join('food_orders', 'food_orders.menuId', '=', 'menu.id')
             ->join('transactions', 'transactions.id', '=', 'food_orders.transactionId')
             ->select(DB::raw('menu.id, menu.menuName, menu.description, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice, food_orders.quantity'))
-            ->where('food_orders.transactionId', '=', $details[$i]['transactionId'])
+            ->where('food_orders.transactionId', '=', $details[$i]['id'])
             ->get();
 
             $menu[] = $foodOrders;
