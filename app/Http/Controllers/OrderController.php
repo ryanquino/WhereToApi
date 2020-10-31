@@ -292,7 +292,7 @@ class OrderController extends Controller
             ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
             ->select('transactions.id', 'users.name', 'restaurants.restaurantName', 'transactions.deliveryAddress', 'barangay.barangayName', 'transactions.deliveryCharge')
             ->where('transactions.cityId', $id)
-            ->whereDate('transactions.createdAt', date('Y-m-d'))
+            ->whereDate('transactions.created_at', date('Y-m-d'))
             ->orderBy('transactions.created_at', 'desc')
             ->get();
 
