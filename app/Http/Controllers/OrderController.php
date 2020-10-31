@@ -296,7 +296,6 @@ class OrderController extends Controller
             ->orderBy('transactions.created_at', 'desc')
             ->get();
         $details = json_decode($details, true);
-        return response()->json($details[0]['id']);
         
         $menu = array();
         for($i=0;$i<count($details);$i++){
