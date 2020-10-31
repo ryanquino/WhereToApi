@@ -296,6 +296,7 @@ class OrderController extends Controller
             ->orderBy('transactions.created_at', 'desc')
             ->get();
 
+        $menu = array();
         for($i=0;$i<count($details);$i++){
             $foodOrders = DB::table('menu')
             ->join('food_orders', 'food_orders.menuId', '=', 'menu.id')
