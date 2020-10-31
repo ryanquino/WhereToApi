@@ -284,4 +284,30 @@ class OrderController extends Controller
         $order->longitude = $longitude;
         $order->save();
     }
+
+    public function ordersOfTheDay($id){
+        $details = DB::table('transactions')
+            ->join('restaurants', 'restaurants.id', '=', 'transactions.restaurantId')
+            ->join('users', 'users.id', '=', 'transactions.riderId')
+            ->join('barangay', 'barangay.id', '=', 'transactions.barangayId')
+            ->select('transactions.id', 'users.name', 'restaurants.restaurantName', 'transactions.deliveryAddress', 'barangay.barangayName', 'transactions.deliveryCharge')
+            ->where('transactions.cityId', $id)
+            ->whereDate('transactions.createdAt', date('Y-m-d'))
+            ->orderBy('transactions.created_at', 'desc')
+            ->get();
+
+        for($i=0;$i<count($details);$i++){
+            $foodOrders = DB::table('menu')
+            ->join('food_orders', 'food_orders.menuId', '=', 'menu.id')
+            ->join('transactions', 'transactions.id', '=', 'food_orders.transactionId')
+            ->select(DB::raw('menu.id, menu.menuName, menu.description, ((menu.price * menu.markUpPercentage) + menu.price) as totalPrice, food_orders.quantity'))
+            ->where('food_orders.transactionId', '=', $details[])
+            ->get();
+
+            $menu[] = $foodOrders;
+        }
+
+        return response()->json(array('transactionDetails' =>$details, 'menuList' => $menu));
+        
+    }
 }
