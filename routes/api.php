@@ -88,6 +88,8 @@ Route::post('getTotalSalesCommission', 'ReportController@getTotalSalesCommission
 Route::get('getReceipt/{id}', 'ReportController@getReceipt');
 Route::get('ordersOfTheDay/{id}', 'OrderController@ordersOfTheDay');
 Route::post('deleteMenu/{id}', 'MenuController@deleteMenu');
+Route::post('addCityFranchise', 'UserController@addCityFranchise');
+Route::post('addBarangayCharge', 'UserController@addBarangayCharge');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

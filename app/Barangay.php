@@ -10,6 +10,6 @@ class Barangay extends Model
     protected $table = 'barangay';
 
     protected $fillable = [
-        'barangayName'
+        'barangayName','charge'
     ];
 }

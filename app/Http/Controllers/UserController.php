@@ -384,5 +384,23 @@ class UserController extends Controller
         return response()->json($city); 
     }
 
+    public function addCityFranchise(Request $request){
+        $cityName = $request->json()->get('cityName');
+
+        $city = DB::table('city')->insert([
+                    ['cityName' => $cityName],
+                ]);
+    }
+
+    public function addBarangayCharge(Request $request){
+        $cityId = $request->json()->get('cityId');
+        $barangayName = $request->json()->get('cityName');
+        $charge = $request->json()->get('charge');
+
+        $brgy = DB::table('city')->insert([
+                    ['cityId' => $cityId, 'barangayName' => $barangayName, 'charge' => $charge],
+                ]);
+
+    }
 
 }
