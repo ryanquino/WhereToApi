@@ -397,10 +397,11 @@ class UserController extends Controller
         $barangayName = $request->json()->get('cityName');
         $charge = $request->json()->get('charge');
 
-        $brgy = DB::table('city')->insert([
+        $brgy = DB::table('barangay')->insert([
                     ['cityId' => $cityId, 'barangayName' => $barangayName, 'charge' => $charge],
                 ]);
 
     }
+
 
 }
