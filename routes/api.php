@@ -90,6 +90,7 @@ Route::get('ordersOfTheDay/{id}', 'OrderController@ordersOfTheDay');
 Route::post('deleteMenu/{id}', 'MenuController@deleteMenu');
 Route::post('addCityFranchise', 'UserController@addCityFranchise');
 Route::post('addBarangayCharge', 'UserController@addBarangayCharge');
+Route::post('updateBarangayCharge', 'UserController@updateBarangayCharge');
 
 Route::get('profile', 'UserController@getAuthenticatedUser');
 Route::get('logout', 'UserController@logout');

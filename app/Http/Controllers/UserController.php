@@ -403,5 +403,14 @@ class UserController extends Controller
 
     }
 
+    public function updateBarangayCharge(Request $request){
+        $id = $request->json()->get('id');
+        $charge = $request->json()->get('charge');
+
+        $affected = DB::table('barangay')
+              ->where('id', $id)
+              ->update(['charge' => $charge]);
+    }
+
 
 }
